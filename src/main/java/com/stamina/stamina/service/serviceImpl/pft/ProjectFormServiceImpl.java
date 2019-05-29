@@ -114,7 +114,8 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         List<Map> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Map map = new HashMap();
-            map.put(i,CommonEnum.Unit.getName(i));
+            map.put("key",i);
+            map.put("value",CommonEnum.Unit.getName(i));
             list.add(map);
         }
         return list;
