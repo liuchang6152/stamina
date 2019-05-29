@@ -137,7 +137,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             Map map1 = new HashMap();
             map1.put("key",i);
             map1.put("value",CommonEnum.Unit.getName(i));
-            list.add(map);
+            list.add(map1);
         }
         return list;
     }
