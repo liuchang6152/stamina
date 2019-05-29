@@ -9,6 +9,8 @@ package com.stamina.stamina.entity.pft;
  * 描    述：测试项目清单entity
  */
 
+import com.stamina.stamina.common.util.CommonEnum;
+
 public class ProjectFormEntity {
 
     /**
@@ -71,7 +73,7 @@ public class ProjectFormEntity {
         return scoreconfigureMany;
     }
 
-    public void setScoreconfigureMany(Integer scoreconfigureMany) {
-        this.scoreconfigureMany = scoreconfigureMany;
+    public void setScoreconfigureMany(String scoreconfigureMany) {
+        this.scoreconfigureMany = CommonEnum.Unit.getId(scoreconfigureMany);
     }
 }

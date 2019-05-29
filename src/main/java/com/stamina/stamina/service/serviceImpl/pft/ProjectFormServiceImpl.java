@@ -45,6 +45,10 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         ProjectFormPojo formPojo = null;
         try {
 //            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
+            CommonResult check = check(entity);
+            if(check.getIsSuccess()==false){
+                return  check;
+            }
             formPojo.setAbroadNameCode(entity.getAbroadNameCode());
             formPojo.setProjectCompany(entity.getProjectCompany());
             formPojo.setScoreconfigureMany(entity.getScoreconfigureMany());
@@ -66,6 +70,10 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         ProjectFormPojo formPojo = null;
         try {
 //            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
+            CommonResult check = check(entity);
+            if(check.getIsSuccess()==false){
+                return  check;
+            }
             formPojo.setAbroadNameCode(entity.getAbroadNameCode());
             formPojo.setProjectCompany(entity.getProjectCompany());
             formPojo.setProjectformId(entity.getProjectformId());
@@ -121,10 +129,14 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     @Override
     public List<Map> getUnit() {
         List<Map> list = new ArrayList<>();
+        Map map = new HashMap();
+        map.put("key","");
+        map.put("value","请选择");
+        list.add(map);
         for (int i = 0; i < 5; i++) {
-            Map map = new HashMap();
-            map.put("key",i);
-            map.put("value",CommonEnum.Unit.getName(i));
+            Map map1 = new HashMap();
+            map1.put("key",i);
+            map1.put("value",CommonEnum.Unit.getName(i));
             list.add(map);
         }
         return list;
@@ -144,4 +156,22 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         }
         return list;
     }
+
+
+    /**
+     * 校验项目名
+     */
+    public CommonResult check(ProjectFormEntity entity){
+        CommonResult commonResult = new CommonResult();
+        List<ProjectFormPojo> byprojectName = projectFormRepository.findByprojectName(entity.getProjectName());
+        if(byprojectName.size()>0){
+            commonResult.setMessage("项目名称重复！");
+            commonResult.setIsSuccess(false);
+            return commonResult;
+        }
+        return commonResult;
+
+    }
+
+
 }

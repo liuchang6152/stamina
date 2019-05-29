@@ -31,6 +31,15 @@ public class CommonEnum {
             }
             return null;
         }
+
+        public static Integer getId(String name) {
+            for (Unit c : Unit.values()) {
+                if (c.getName().equals(name)) {
+                    return c.id;
+                }
+            }
+            return null;
+        }
         private Integer id;
 
         private String name;

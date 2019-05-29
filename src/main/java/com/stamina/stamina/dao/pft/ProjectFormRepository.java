@@ -2,6 +2,9 @@ package com.stamina.stamina.dao.pft;
 
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
 /**
  * 模块编号：ProjectFormRepository
  *
@@ -13,4 +16,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ProjectFormRepository extends JpaRepository<ProjectFormPojo, Long>{
 
 
+    List<ProjectFormPojo> findByprojectName(String projectName);
 }
