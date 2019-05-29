@@ -7,8 +7,6 @@ import com.stamina.stamina.service.pft.ProjectFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.PastOrPresent;
 import java.util.List;
 /*
  *
@@ -22,7 +20,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/fpt/projectform", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class ProjectFormController {
+class ProjectFormController {
 
     @Autowired
     private ProjectFormService projectFormService;

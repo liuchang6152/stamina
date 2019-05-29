@@ -7,7 +7,7 @@ import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import com.stamina.stamina.service.pft.ProjectFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pcitc.imp.common.ettool.utils.ObjectConverter;
+
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -33,7 +33,11 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         CommonResult commonResult = new CommonResult();
         ProjectFormPojo formPojo = null;
         try {
-            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
+//            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
+            formPojo.setAbroadNameCode(entity.getAbroadNameCode());
+            formPojo.setProjectCompany(entity.getProjectCompany());
+            formPojo.setScoreconfigureMany(entity.getScoreconfigure_many());
+            formPojo.setProjectName(entity.getProjectName());
             projectFormRepository.save(formPojo);
             commonResult.setIsSuccess(true);
             commonResult.setMessage("添加成功！");
@@ -50,7 +54,12 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         CommonResult commonResult = new CommonResult();
         ProjectFormPojo formPojo = null;
         try {
-            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
+//            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
+            formPojo.setAbroadNameCode(entity.getAbroadNameCode());
+            formPojo.setProjectCompany(entity.getProjectCompany());
+            formPojo.setProjectformId(entity.getProjectformId());
+            formPojo.setScoreconfigureMany(entity.getScoreconfigure_many());
+            formPojo.setProjectName(entity.getProjectName());
             projectFormRepository.save(formPojo);
             commonResult.setIsSuccess(true);
             commonResult.setMessage("修改成功！");

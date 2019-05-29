@@ -46,7 +46,7 @@ public class ProjectFormPojo {
      *（0取最大值，1取最小值，2取平均值）
      */
     @Column(name = "SCORECONFIGURE_MANY")
-    private Integer scoreconfigure_many;
+    private Integer scoreconfigureMany;
 
 
     public Long getProjectformId() {
@@ -81,11 +81,11 @@ public class ProjectFormPojo {
         this.projectCompany = projectCompany;
     }
 
-    public Integer getScoreconfigure_many() {
-        return scoreconfigure_many;
+    public Integer getScoreconfigureMany() {
+        return scoreconfigureMany;
     }
 
-    public void setScoreconfigure_many(Integer scoreconfigure_many) {
-        this.scoreconfigure_many = scoreconfigure_many;
+    public void setScoreconfigureMany(Integer scoreconfigureMany) {
+        this.scoreconfigureMany = scoreconfigureMany;
     }
 }
