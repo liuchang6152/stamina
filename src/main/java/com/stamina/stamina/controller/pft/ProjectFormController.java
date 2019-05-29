@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 /*
  *
  * 模块编号：
@@ -71,6 +72,14 @@ class ProjectFormController {
     @GetMapping("getProjectById")
     public CommonResult getProjectById(Long projectFormId){
         return projectFormService.getProjectById(projectFormId);
+    }
+
+    /**
+     * 获取单位下拉框
+     */
+    @GetMapping("getUnit")
+    public List<Map> getUnit(){
+        return projectFormService.getUnit();
     }
 
 

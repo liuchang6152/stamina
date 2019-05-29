@@ -5,6 +5,7 @@ import com.stamina.stamina.entity.pft.ProjectFormEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -43,4 +44,10 @@ public interface ProjectFormService {
      * @return
      */
     CommonResult getProjectById(Long projectFormId);
+
+    /**
+     * 获取单位下拉框
+     * @return
+     */
+    List<Map> getUnit();
 }

@@ -1,5 +1,6 @@
 package com.stamina.stamina.service.serviceImpl.pft;
 
+import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.dao.pft.ProjectFormRepository;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
@@ -10,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  *
@@ -107,5 +107,16 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             commonResult.setIsSuccess(false);
         }
         return commonResult;
+    }
+
+    @Override
+    public List<Map> getUnit() {
+        List<Map> list = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Map map = new HashMap();
+            map.put(i,CommonEnum.Unit.getName(i));
+            list.add(map);
+        }
+        return list;
     }
 }
