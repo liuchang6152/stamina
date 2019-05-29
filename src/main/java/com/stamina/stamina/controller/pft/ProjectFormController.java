@@ -63,5 +63,15 @@ class ProjectFormController {
         return projectFormService.delProjectInfo(projectFormIds);
     }
 
+    /**
+     * 根据项目ID获取项目信息
+     * @param projectFormId
+     * @return
+     */
+    @GetMapping("getProjectById")
+    public CommonResult getProjectById(Long projectFormId){
+        return projectFormService.getProjectById(projectFormId);
+    }
+
 
 }

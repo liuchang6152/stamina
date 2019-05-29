@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+
 /**
  *
  * 模块编号：pcitc_ecs_bll_bc_AddressBookServiceImpl
@@ -36,7 +38,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
 //            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
             formPojo.setAbroadNameCode(entity.getAbroadNameCode());
             formPojo.setProjectCompany(entity.getProjectCompany());
-            formPojo.setScoreconfigureMany(entity.getScoreconfigure_many());
+            formPojo.setScoreconfigureMany(entity.getScoreconfigureMany());
             formPojo.setProjectName(entity.getProjectName());
             projectFormRepository.save(formPojo);
             commonResult.setIsSuccess(true);
@@ -58,7 +60,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             formPojo.setAbroadNameCode(entity.getAbroadNameCode());
             formPojo.setProjectCompany(entity.getProjectCompany());
             formPojo.setProjectformId(entity.getProjectformId());
-            formPojo.setScoreconfigureMany(entity.getScoreconfigure_many());
+            formPojo.setScoreconfigureMany(entity.getScoreconfigureMany());
             formPojo.setProjectName(entity.getProjectName());
             projectFormRepository.save(formPojo);
             commonResult.setIsSuccess(true);
@@ -88,6 +90,21 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             e.printStackTrace();
             commonResult.setIsSuccess(false);
             commonResult.setMessage("删除失败！");
+        }
+        return commonResult;
+    }
+
+    @Override
+    public CommonResult getProjectById(Long projectFormId) {
+        CommonResult commonResult = new CommonResult();
+        try {
+            Optional<ProjectFormPojo> byId = projectFormRepository.findById(projectFormId);
+            ProjectFormPojo formPojo = byId.get();
+            commonResult.setResult(formPojo);
+            commonResult.setIsSuccess(true);
+        }catch (Exception ex){
+            commonResult.setMessage("获取失败！");
+            commonResult.setIsSuccess(false);
         }
         return commonResult;
     }

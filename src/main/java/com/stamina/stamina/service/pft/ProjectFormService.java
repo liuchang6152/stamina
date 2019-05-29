@@ -37,4 +37,10 @@ public interface ProjectFormService {
      * @return
      */
     CommonResult delProjectInfo(Long[] projectFormIds);
+    /**
+     * 根据项目ID获取项目信息
+     * @param projectFormId
+     * @return
+     */
+    CommonResult getProjectById(Long projectFormId);
 }
