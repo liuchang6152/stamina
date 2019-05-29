@@ -128,6 +128,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             ProjectFormPojo formPojo = byId.get();
             ProjectFormEntity projectFormEntity = new ProjectFormEntity();
             projectFormEntity.setAbroadNameCode(formPojo.getAbroadNameCode());
+            projectFormEntity.setProjectCompany(formPojo.getProjectCompany());
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
