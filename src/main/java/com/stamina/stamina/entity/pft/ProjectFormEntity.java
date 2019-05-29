@@ -11,6 +11,8 @@ package com.stamina.stamina.entity.pft;
 
 import com.stamina.stamina.common.util.CommonEnum;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 public class ProjectFormEntity {
 
     /**
@@ -73,7 +75,7 @@ public class ProjectFormEntity {
         return scoreconfigureMany;
     }
 
-    public void setScoreconfigureMany(String scoreconfigureMany) {
-        this.scoreconfigureMany = CommonEnum.Unit.getId(scoreconfigureMany);
+    public void setScoreconfigureMany(Integer scoreconfigureMany) {
+        this.scoreconfigureMany = scoreconfigureMany;
     }
 }

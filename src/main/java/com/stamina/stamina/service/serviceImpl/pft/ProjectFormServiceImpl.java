@@ -42,16 +42,15 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     @Override
     public CommonResult addProjectInfo(ProjectFormEntity entity) {
         CommonResult commonResult = new CommonResult();
-        ProjectFormPojo formPojo = null;
         try {
 //            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
             CommonResult check = check(entity);
             if(check.getIsSuccess()==false){
                 return  check;
             }
+            ProjectFormPojo formPojo = new ProjectFormPojo();
             formPojo.setAbroadNameCode(entity.getAbroadNameCode());
             formPojo.setProjectCompany(entity.getProjectCompany());
-            formPojo.setScoreconfigureMany(entity.getScoreconfigureMany());
             formPojo.setProjectName(entity.getProjectName());
             projectFormRepository.save(formPojo);
             commonResult.setIsSuccess(true);
@@ -67,17 +66,17 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     @Override
     public CommonResult updateProjectInfo(ProjectFormEntity entity) {
         CommonResult commonResult = new CommonResult();
-        ProjectFormPojo formPojo = null;
+
         try {
 //            formPojo = ObjectConverter.entityConverter(entity, ProjectFormPojo.class);
             CommonResult check = check(entity);
             if(check.getIsSuccess()==false){
                 return  check;
             }
+            ProjectFormPojo formPojo = new ProjectFormPojo();
             formPojo.setAbroadNameCode(entity.getAbroadNameCode());
             formPojo.setProjectCompany(entity.getProjectCompany());
             formPojo.setProjectformId(entity.getProjectformId());
-            formPojo.setScoreconfigureMany(entity.getScoreconfigureMany());
             formPojo.setProjectName(entity.getProjectName());
             projectFormRepository.save(formPojo);
             commonResult.setIsSuccess(true);
