@@ -3,8 +3,11 @@ package com.stamina.stamina.service.serviceImpl.pft;
 import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.dao.pft.ProjectFormRepository;
+import com.stamina.stamina.dao.pft.ScoreConfigureRepository;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
+import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
+import com.stamina.stamina.pojo.pft.ScoreConfigurePojo;
 import com.stamina.stamina.service.pft.ProjectFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +26,14 @@ import java.util.*;
  */
 @Service
 public class ProjectFormServiceImpl implements ProjectFormService {
+
     @Autowired
     private ProjectFormRepository projectFormRepository;
+
+    @Autowired
+    private ScoreConfigureRepository scoreConfigureRepository;
+
+
     @Override
     public List<ProjectFormPojo> getProjectFormList() {
         return projectFormRepository.findAll();
@@ -117,6 +126,21 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             map.put("key",i);
             map.put("value",CommonEnum.Unit.getName(i));
             list.add(map);
+        }
+        return list;
+    }
+
+    @Override
+    public List<ProjectSettingEntity> getProjectSetting() {
+        List<ProjectSettingEntity> list = new ArrayList<>();
+        List<ProjectFormPojo> all = projectFormRepository.findAll();
+        for (ProjectFormPojo formPojo : all) {
+            ProjectSettingEntity projectSettingEntity = new ProjectSettingEntity();
+            projectSettingEntity.setProjectformId(formPojo.getProjectformId());
+            projectSettingEntity.setProjectName(formPojo.getProjectName());
+            List<ScoreConfigurePojo> scoreConfigurePojos = scoreConfigureRepository.findByprojectFormId(formPojo.getProjectformId());
+            projectSettingEntity.setScoreConfigurePojos(scoreConfigurePojos);
+            list.add(projectSettingEntity);
         }
         return list;
     }

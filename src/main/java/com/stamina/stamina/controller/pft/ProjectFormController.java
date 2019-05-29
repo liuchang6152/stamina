@@ -2,6 +2,7 @@ package com.stamina.stamina.controller.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
+import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import com.stamina.stamina.service.pft.ProjectFormService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/fpt/projectform", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-class ProjectFormController {
+public class ProjectFormController {
 
     @Autowired
     private ProjectFormService projectFormService;
@@ -40,7 +41,7 @@ class ProjectFormController {
      * @return
      */
     @PostMapping()
-    public CommonResult addProjectInfo(ProjectFormEntity entity){
+    public CommonResult addProjectInfo(@RequestBody ProjectFormEntity entity){
         return projectFormService.addProjectInfo(entity);
     }
 
@@ -50,7 +51,7 @@ class ProjectFormController {
      * @return
      */
     @PutMapping()
-    public CommonResult updateProjectInfo(ProjectFormEntity entity){
+    public CommonResult updateProjectInfo(@RequestBody ProjectFormEntity entity){
         return projectFormService.updateProjectInfo(entity);
     }
 
@@ -82,5 +83,12 @@ class ProjectFormController {
         return projectFormService.getUnit();
     }
 
+    /**
+     * 获取项目清单配置信息
+     */
+    @GetMapping("getProjectSetting")
+    public List<ProjectSettingEntity> getProjectSetting(){
+        return projectFormService.getProjectSetting();
+    }
 
 }

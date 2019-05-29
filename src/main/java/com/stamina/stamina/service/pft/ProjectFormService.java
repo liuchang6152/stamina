@@ -2,6 +2,7 @@ package com.stamina.stamina.service.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
+import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 
 import java.util.List;
@@ -50,4 +51,9 @@ public interface ProjectFormService {
      * @return
      */
     List<Map> getUnit();
+
+    /**
+     * 获取项目清单配置信息
+     */
+    List<ProjectSettingEntity> getProjectSetting();
 }
