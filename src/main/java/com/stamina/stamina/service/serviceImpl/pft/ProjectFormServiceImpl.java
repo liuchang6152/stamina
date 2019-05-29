@@ -35,8 +35,19 @@ public class ProjectFormServiceImpl implements ProjectFormService {
 
 
     @Override
-    public List<ProjectFormPojo> getProjectFormList() {
-        return projectFormRepository.findAll();
+    public List<ProjectFormEntity> getProjectFormList() {
+        List<ProjectFormEntity> entities = new ArrayList<>();
+        List<ProjectFormPojo> all = projectFormRepository.findAll();
+        for (ProjectFormPojo formPojo : all) {
+            ProjectFormEntity projectFormEntity = new ProjectFormEntity();
+            projectFormEntity.setAbroadNameCode(formPojo.getAbroadNameCode());
+            projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
+            projectFormEntity.setProjectformId(formPojo.getProjectformId());
+            projectFormEntity.setProjectName(formPojo.getProjectName());
+            projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
+            entities.add(projectFormEntity);
+        }
+        return entities;
     }
 
     @Override

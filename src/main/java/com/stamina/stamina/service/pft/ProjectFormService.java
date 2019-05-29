@@ -20,7 +20,7 @@ public interface ProjectFormService {
     /**
      * 获取项目清单
      */
-    List<ProjectFormPojo> getProjectFormList();
+    List<ProjectFormEntity> getProjectFormList();
     /**
      * 新增项目清单信息
      * @param entity

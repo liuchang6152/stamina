@@ -34,6 +34,8 @@ public class ProjectFormEntity {
      */
     private Integer projectCompany;
 
+    private String projectCompanyName;
+
     /**
      *（0取最大值，1取最小值，2取平均值）
      */
@@ -77,5 +79,13 @@ public class ProjectFormEntity {
 
     public void setScoreconfigureMany(Integer scoreconfigureMany) {
         this.scoreconfigureMany = scoreconfigureMany;
+    }
+
+    public String getProjectCompanyName() {
+        return projectCompanyName;
+    }
+
+    public void setProjectCompanyName(String projectCompanyName) {
+        this.projectCompanyName = projectCompanyName;
     }
 }

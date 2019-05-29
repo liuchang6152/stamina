@@ -31,7 +31,7 @@ public class ProjectFormController {
      * 获取项目清单
      */
     @GetMapping()
-    public List<ProjectFormPojo> getProjectFormList(){
+    public List<ProjectFormEntity> getProjectFormList(){
         return projectFormService.getProjectFormList();
     }
 
