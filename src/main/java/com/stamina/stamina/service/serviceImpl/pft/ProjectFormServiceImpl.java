@@ -105,7 +105,6 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     @Transactional
     public CommonResult delProjectInfo(Long[] projectFormIds) {
         CommonResult commonResult = new CommonResult();
-        ProjectFormPojo formPojo = null;
         try {
             for (int i = 0; i < projectFormIds.length; i++) {
                 Long projectFormId = projectFormIds[i];
@@ -127,7 +126,13 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         try {
             Optional<ProjectFormPojo> byId = projectFormRepository.findById(projectFormId);
             ProjectFormPojo formPojo = byId.get();
-            commonResult.setResult(formPojo);
+            ProjectFormEntity projectFormEntity = new ProjectFormEntity();
+            projectFormEntity.setAbroadNameCode(formPojo.getAbroadNameCode());
+            projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
+            projectFormEntity.setProjectformId(formPojo.getProjectformId());
+            projectFormEntity.setProjectName(formPojo.getProjectName());
+            projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
+            commonResult.setResult(projectFormEntity);
             commonResult.setIsSuccess(true);
         }catch (Exception ex){
             commonResult.setMessage("获取失败！");
