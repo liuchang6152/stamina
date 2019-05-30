@@ -53,4 +53,47 @@ public class CommonEnum {
         }
 
     }
+
+    /**
+     *（0取最大值，1取最小值，2取平均值）
+     */
+    public enum Value {
+        MAXIMUM(0,"最大值"),
+        MINIMUM(1,"最小值"),
+        AVERAGE(2,"平均值");
+        Value(Integer id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public static String getName(Integer index) {
+            for (Unit c : Unit.values()) {
+                if (c.getId().equals(index)) {
+                    return c.name;
+                }
+            }
+            return null;
+        }
+
+        public static Integer getId(String name) {
+            for (Unit c : Unit.values()) {
+                if (c.getName().equals(name)) {
+                    return c.id;
+                }
+            }
+            return null;
+        }
+        private Integer id;
+
+        private String name;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+    }
 }

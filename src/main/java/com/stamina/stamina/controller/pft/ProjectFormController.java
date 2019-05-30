@@ -91,4 +91,12 @@ public class ProjectFormController {
         return projectFormService.getProjectSetting();
     }
 
+    /**
+     * 修改项目清单配置信息
+     */
+    @GetMapping("updProjectSetting")
+    public CommonResult updProjectSetting(ProjectSettingEntity entity){
+        return projectFormService.updProjectSetting(entity);
+    }
+
 }

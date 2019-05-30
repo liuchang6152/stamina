@@ -2,6 +2,7 @@ package com.stamina.stamina.entity.pft;
 
 import com.stamina.stamina.pojo.pft.ScoreConfigurePojo;
 
+import javax.persistence.Column;
 import java.util.List;
 
 public class ProjectSettingEntity {
@@ -15,6 +16,11 @@ public class ProjectSettingEntity {
      * 项目名称
      */
     private String projectName;
+
+    /**
+     *0取最大值，1取最小值，2取平均值）
+     */
+    private Integer scoreconfigureMany;
 
     /**
      * 项目清单配置信息
@@ -43,5 +49,13 @@ public class ProjectSettingEntity {
 
     public void setScoreConfigurePojos(List<ScoreConfigurePojo> scoreConfigurePojos) {
         this.scoreConfigurePojos = scoreConfigurePojos;
+    }
+
+    public Integer getScoreconfigureMany() {
+        return scoreconfigureMany;
+    }
+
+    public void setScoreconfigureMany(Integer scoreconfigureMany) {
+        this.scoreconfigureMany = scoreconfigureMany;
     }
 }

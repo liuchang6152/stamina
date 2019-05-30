@@ -166,11 +166,35 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             ProjectSettingEntity projectSettingEntity = new ProjectSettingEntity();
             projectSettingEntity.setProjectformId(formPojo.getProjectformId());
             projectSettingEntity.setProjectName(formPojo.getProjectName());
+            projectSettingEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
             List<ScoreConfigurePojo> scoreConfigurePojos = scoreConfigureRepository.findByprojectFormId(formPojo.getProjectformId());
             projectSettingEntity.setScoreConfigurePojos(scoreConfigurePojos);
             list.add(projectSettingEntity);
         }
         return list;
+    }
+
+    @Override
+    public CommonResult updProjectSetting(ProjectSettingEntity entity) {
+        CommonResult commonResult = new CommonResult();
+        try {
+            Optional<ProjectFormPojo> byId = projectFormRepository.findById(entity.getProjectformId());
+            byId.get().setScoreconfigureMany(entity.getScoreconfigureMany());
+            projectFormRepository.save(byId.get());
+            List<ScoreConfigurePojo> byprojectFormId = scoreConfigureRepository.findByprojectFormId(entity.getProjectformId());
+            for (ScoreConfigurePojo scoreConfigurePojo : byprojectFormId) {
+                scoreConfigureRepository.delete(scoreConfigurePojo);
+            }
+            for (ScoreConfigurePojo scoreConfigurePojo : entity.getScoreConfigurePojos()) {
+                scoreConfigureRepository.save(scoreConfigurePojo);
+            }
+            commonResult.setResult("修改成功");
+            commonResult.setIsSuccess(true);
+        } catch (Exception ex){
+            commonResult.setMessage("修改失败！");
+            commonResult.setIsSuccess(false);
+        }
+        return commonResult;
     }
 
 
@@ -186,8 +210,6 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             return commonResult;
         }
         return commonResult;
-
     }
-
 
 }

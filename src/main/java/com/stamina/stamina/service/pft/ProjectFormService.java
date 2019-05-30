@@ -56,4 +56,11 @@ public interface ProjectFormService {
      * 获取项目清单配置信息
      */
     List<ProjectSettingEntity> getProjectSetting();
+
+    /**
+     * 修改项目配置
+     * @param entity
+     * @return
+     */
+    CommonResult updProjectSetting(ProjectSettingEntity entity);
 }
