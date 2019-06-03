@@ -56,9 +56,9 @@ public class ScoreConfigureServiceImpl implements ScoreConfigureService {
         List<ScoreConfigurePojo> scoreConfigureList = scoreConfigureRepository.findByprojectFormId(projectformId);
         for (ScoreConfigurePojo pojo : scoreConfigureList) {
             Map map = new HashMap();
-            map.put("低值", pojo.getScoreconfigureLow());
-            map.put("高值", pojo.getScoreconfigureHigh());
-            map.put("分数", pojo.getScoreconfigureFraction());
+            map.put("scoreconfigureLow", pojo.getScoreconfigureLow());
+            map.put("scoreconfigureHigh", pojo.getScoreconfigureHigh());
+            map.put("scoreconfigureFraction", pojo.getScoreconfigureFraction());
             list.add(map);
         }
         return list;
