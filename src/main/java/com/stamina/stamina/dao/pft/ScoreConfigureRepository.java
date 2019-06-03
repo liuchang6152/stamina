@@ -17,4 +17,5 @@ import java.util.List;
 public interface ScoreConfigureRepository  extends JpaRepository<ScoreConfigurePojo, Long> {
 
     List<ScoreConfigurePojo> findByprojectFormId(Long projectformId);
+
 }

@@ -1,5 +1,6 @@
 package com.stamina.stamina.pojo.pft;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @Entity
 @DynamicUpdate
 @Table(name = "t_pft_projectform")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class ProjectFormPojo {
 
     /**

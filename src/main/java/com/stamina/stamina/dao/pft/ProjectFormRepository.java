@@ -17,4 +17,6 @@ public interface ProjectFormRepository extends JpaRepository<ProjectFormPojo, Lo
 
 
     List<ProjectFormPojo> findByprojectName(String projectName);
+
+    ProjectFormPojo findProjectFormPojoByProjectformId(Long projectformId);
 }
