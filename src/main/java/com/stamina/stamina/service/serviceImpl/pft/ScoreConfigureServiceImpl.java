@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 模板编号：
@@ -45,5 +47,20 @@ public class ScoreConfigureServiceImpl implements ScoreConfigureService {
         projectSettingEntityList.add(entity);
 
         return projectSettingEntityList;
+    }
+
+    @Override
+    public List<Map> getScoreListByProjectFormId2(Long projectformId) {
+
+        List<Map> list = new ArrayList<>();
+        List<ScoreConfigurePojo> scoreConfigureList = scoreConfigureRepository.findByprojectFormId(projectformId);
+        for (ScoreConfigurePojo pojo : scoreConfigureList) {
+            Map map = new HashMap();
+            map.put("低值", pojo.getScoreconfigureLow());
+            map.put("高值", pojo.getScoreconfigureHigh());
+            map.put("分数", pojo.getScoreconfigureFraction());
+            list.add(map);
+        }
+        return list;
     }
 }

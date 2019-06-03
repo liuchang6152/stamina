@@ -3,6 +3,7 @@ package com.stamina.stamina.service.pft;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 模板编号：
@@ -13,4 +14,6 @@ import java.util.List;
  */
 public interface ScoreConfigureService {
     List<ProjectSettingEntity> getScoreListByProjectFormId(Long projectformId);
+
+    List<Map> getScoreListByProjectFormId2(Long projectformId);
 }

@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 模板编号：
@@ -23,10 +24,17 @@ public class ScoreConfigureController {
     @Autowired
     private ScoreConfigureService scoreConfigureService;
 
-    @GetMapping(value = "/{projectformId}")
+    /*@GetMapping(value = "/{projectformId}")
     public List<ProjectSettingEntity> getScoreListByProjectFormId(@PathVariable Long projectformId) {
 
         List<ProjectSettingEntity> list = scoreConfigureService.getScoreListByProjectFormId(projectformId);
+        return list;
+    }*/
+
+    @GetMapping(value = "/{projectformId}")
+    public List<Map> getScoreListByProjectFormId2(@PathVariable Long projectformId) {
+
+        List list = scoreConfigureService.getScoreListByProjectFormId2(projectformId);
         return list;
     }
 
