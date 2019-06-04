@@ -3,6 +3,8 @@ package com.stamina.stamina.dao.pft;
 import com.stamina.stamina.pojo.pft.ProjectFractionPojo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * 模板编号：ProjectFractionRepository
  * 创建者: 壮壮
@@ -12,5 +14,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ProjectFractionRepository extends JpaRepository<ProjectFractionPojo, Long> ,ProjectFractionRepositoryCustom {
 
+    List<ProjectFractionPojo> findByProjectBatchcodeAndRawprojectPeoplecode(String projectBatchcode, String rawprojectPeoplecode);
 
 }
