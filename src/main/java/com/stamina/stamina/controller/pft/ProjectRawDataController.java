@@ -24,19 +24,19 @@ public class ProjectRawDataController {
     @Autowired
     private ProjectRawDataService projectRawDataService;
 
-    /*@GetMapping
-    public List getProjecTrawData(String rawProjectBatchCode, String beginTime,
-                                  String endTime) throws Exception {
-
-        return projectRawDataService.getProjectRawData(rawProjectBatchCode, beginTime, endTime);
-    }
-*/
-
     @GetMapping("/getProjectRawData/{rawprojectBatchcode}/{rawprojectProplecode}")
     public CommonResult getProjectRawData(@PathVariable String rawprojectBatchcode, @PathVariable String rawprojectProplecode) {
 
         return projectRawDataService.getProjectRawData(rawprojectBatchcode, rawprojectProplecode);
     }
 
+    /***
+     * 体能批次查询
+     * @return
+     */
+    @GetMapping
+    public CommonResult physicalBatchQuery() {
 
+        return projectRawDataService.physicalBatchQuery();
+    }
 }

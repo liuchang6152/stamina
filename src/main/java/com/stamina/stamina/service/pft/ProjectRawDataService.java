@@ -15,5 +15,5 @@ import java.util.List;
 public interface ProjectRawDataService {
     CommonResult getProjectRawData(String rawprojectBatchcode, String rawprojectProplecode);
 
-    //List getProjectRawData(String rawProjectBatchCode, String beginTime, String endTime) throws Exception;
+    CommonResult physicalBatchQuery();
 }

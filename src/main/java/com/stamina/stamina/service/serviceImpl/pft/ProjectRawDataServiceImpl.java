@@ -4,14 +4,17 @@ import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.dao.pft.ProjectRawDataRepository;
 import com.stamina.stamina.dao.pft.TestersAttributeRepository;
+import com.stamina.stamina.entity.pft.PhysicalBatchQueryEntity;
 import com.stamina.stamina.entity.pft.ProjectRawDataEntity;
 import com.stamina.stamina.pojo.pft.ProjectRawDataPojo;
 import com.stamina.stamina.service.pft.ProjectRawDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,25 +63,36 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
         return commonResult;
     }
 
-    /*@Override
-    public List getProjectRawData(String rawProjectBatchCode, String beginTime, String endTime) throws Exception {
+    @Override
+    public CommonResult physicalBatchQuery() {
 
-        List pageList = new ArrayList();
-        List<ProjectRawDataPojo> ProjecTrawDataList = projectRawDataRepository.findGroupByRawProjectBatchCode();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        for (int i=0; i<ProjecTrawDataList.size(); i++) {
+        CommonResult commonResult = new CommonResult();
 
-            ProjectRawDataPojo pojo = ProjecTrawDataList.get(i);
-            int testNum = testersAttributeRepository.findCount(pojo.getRawprojectBatchcode());
-            ProjectRawDataEntity2 entity2 = new ProjectRawDataEntity2();
-            entity2.setProjectrawdataId(i+1L);
-            entity2.setRawprojectBatchcode(pojo.getRawprojectBatchcode());
-            entity2.setTestNumber(testNum);
-            entity2.setRawprojectTime(sdf.parse(pojo.getRawprojectTime().toString()));
-            pageList.add(entity2);
+        try {
 
+            List<PhysicalBatchQueryEntity> returnList = new ArrayList<>();
+
+            List<Object[]> list = projectRawDataRepository.physicalBatchQuery();
+            for (int i=0; i<list.size(); i++) {
+                PhysicalBatchQueryEntity entity = new PhysicalBatchQueryEntity();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
+                Object[] objects = list.get(i);
+                entity.setProjectrawdataId(i+1L);
+                entity.setRawprojectBatchcode((String) objects[0]);
+                entity.setTestNumber((BigInteger) objects[1]);
+                entity.setRawprojectTime(sdf.format((Date) objects[2]));
+                returnList.add(entity);
+            }
+
+            commonResult.setResult(returnList);
+            commonResult.setIsSuccess(true);
+            commonResult.setMessage("查询成功");
+        } catch (Exception e) {
+            commonResult.setIsSuccess(false);
+            commonResult.setMessage("查询失败");
         }
-        return pageList;
+
+        return commonResult;
     }
-*/
+
 }

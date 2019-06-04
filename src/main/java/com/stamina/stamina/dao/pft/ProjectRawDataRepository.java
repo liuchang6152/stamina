@@ -23,4 +23,7 @@ public interface ProjectRawDataRepository extends JpaRepository<ProjectRawDataPo
     int findCountByRawProjectBatchCode() throws Exception;
 
     List<ProjectRawDataPojo> findByRawprojectBatchcodeAndRawprojectProplecode(String rawprojectBatchcode, String rawprojectProplecode);
+
+    @Query(value = "SELECT prd.RAWPROJECT_BATCHCODE,COUNT(prd.RAWPROJECT_BATCHCODE) as count,prd.RAWPROJECT_TIME FROM t_pft_projectrawdata prd GROUP BY RAWPROJECT_BATCHCODE", nativeQuery = true)
+    List physicalBatchQuery();
 }
