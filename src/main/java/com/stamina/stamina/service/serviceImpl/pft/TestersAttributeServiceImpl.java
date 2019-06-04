@@ -36,8 +36,11 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
     public CommonResult getTestersList(Map searchMap, int pageNum, int pageSize) throws Exception {
 
         Specification specification = createSpecification(searchMap);
-        PageRequest pageRequest = PageRequest.of(pageNum-1, pageSize);
+
+        //按总分倒序
         Sort sort = new Sort(Sort.Direction.DESC, "testersTotalscore");
+        PageRequest pageRequest = PageRequest.of(pageNum-1, pageSize, sort);
+
         Page page = testersAttributeRepository.findAll(specification, pageRequest);
         CommonResult commonResult = new CommonResult();
 
