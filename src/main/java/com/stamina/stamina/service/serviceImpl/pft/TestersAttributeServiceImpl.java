@@ -76,6 +76,9 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
             @Override
             public Predicate toPredicate(Root root, CriteriaQuery criteriaQuery, CriteriaBuilder cb) {
                 List<Predicate> predicateList = new ArrayList<>();
+                if (searchMap.get("rawprojectBatchcode") != null && !"".equals(searchMap.get("rawprojectBatchcode"))) {
+                    predicateList.add(cb.equal(root.get("rawprojectBatchcode").as(String.class), searchMap.get("rawprojectBatchcode")));
+                }
                 if (searchMap.get("testersName") != null && !"".equals(searchMap.get("testersName"))) {
                     predicateList.add(cb.like(root.get("testersName").as(String.class), "%"+searchMap.get("testersName")+"%"));
                 }
