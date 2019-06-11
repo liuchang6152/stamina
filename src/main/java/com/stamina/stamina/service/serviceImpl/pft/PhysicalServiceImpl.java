@@ -17,9 +17,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.stereotype.Service;
 
-import javax.xml.ws.Action;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -39,16 +37,16 @@ public class PhysicalServiceImpl implements PhysicalService {
     private ProjectFractionRepository projectFractionRepository;
 
     @Autowired
-    private ProjectRawDataRepository projectRawDataRepository;
+    private ProjectFormRepository projectFormRepository;
 
     @Autowired
-    private ProjectFormRepository projectFormRepository;
+    private ProjectRawDataRepository projectRawDataRepository;
 
     @Autowired
     private ScoreConfigureRepository scoreConfigureRepository;
 
     @Override
-    public CommonResult physicalServiceinfo(String json) throws ParseException {
+    public CommonResult physicalServiceinfo(String json) {
         CommonResult commonResult = new CommonResult();
 
         try {
@@ -78,7 +76,6 @@ public class PhysicalServiceImpl implements PhysicalService {
             }
 
             //处理项目原始清单中的数据
-
             List<ProjectFormPojo> all = projectFormRepository.findAll();
             for (ProjectFormPojo projectFormPojo : all) {
                 ProjectRawDataPojo projectRawDataPojo = new ProjectRawDataPojo();

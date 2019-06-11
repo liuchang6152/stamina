@@ -2,6 +2,8 @@ package com.stamina.stamina.dao.pft;
 
 import com.stamina.stamina.pojo.pft.TestersAttributePojo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * 模板编号：TestersAttributeRepository
@@ -10,6 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 修改编号：
  * 描述：测试人员表
  */
-public interface TestersAttributeRepository extends JpaRepository<TestersAttributePojo, Integer> {
+public interface TestersAttributeRepository extends JpaRepository<TestersAttributePojo, Integer>,JpaSpecificationExecutor<TestersAttributePojo> {
+
+    @Query(value = "SELECT COUNT(*) FROM t_pft_projectrawdata WHERE RAWPROJECT_BATCHCODE = ?", nativeQuery = true)
+    int findCount(String rawprojectBatchcode) throws Exception;
+
 
 }

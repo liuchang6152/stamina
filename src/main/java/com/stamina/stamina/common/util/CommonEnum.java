@@ -9,6 +9,50 @@ package com.stamina.stamina.common.util;
  */
 public class CommonEnum {
 
+    public enum TestersSexEnum {
+        WoMen("男", 0),
+        Men("女", 1);
+        private String name;
+        public static String getName(int index) {
+            for (TestersSexEnum c : TestersSexEnum.values()) {
+                if (c.getIndex() == index) {
+                    return c.name;
+                }
+            }
+            return "";
+        }
+        public static Integer getIndex(String name) {
+            for (TestersSexEnum c : TestersSexEnum.values()) {
+                if (c.getName().equals(name)) {
+                    return c.index;
+                }
+            }
+            return null;
+        }
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        private int index;
+
+        public String getName() {
+            return name;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        TestersSexEnum(String name, int index) {
+            this.name = name;
+            this.index = index;
+        }
+    }
+
     /**
      *单位(0秒,1厘米,2公斤,3个,4毫升)
      */

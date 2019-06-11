@@ -48,9 +48,9 @@ public class TestersAttributePojo {
     private String userIdcard;
 
     /**
-     *RAWPROJECT_PEOPLECODE
+     *人员身份证code
      */
-    @Column(name = "人员身份证code")
+    @Column(name = "RAWPROJECT_PEOPLECODE")
     private String rawprojectPeoplecode;
 
     /**
