@@ -66,7 +66,6 @@ public class PhysicalServiceImpl implements PhysicalService {
                 //项目原始清单
                 ProjectRawDataPojo projectRawDataPojo = new ProjectRawDataPojo();
                 projectRawDataPojo.setRawprojectBatchcode(code.toString());
-                //projectFractionPojo.setProjectCompany();
                 projectRawDataPojo.setRawprojectProplecode(str[0]);
                 projectRawDataPojo.setRawprojectName(str[1]);
                 projectRawDataPojo.setRawprojectValue(Long.valueOf(str[2])*100);

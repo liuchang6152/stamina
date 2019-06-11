@@ -39,7 +39,7 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
 
         //按总分倒序
         Sort sort = new Sort(Sort.Direction.DESC, "testersTotalscore");
-        PageRequest pageRequest = PageRequest.of(pageNum-1, pageSize, sort);
+        PageRequest pageRequest = new PageRequest(pageNum-1, pageSize, sort);
 
         Page page = testersAttributeRepository.findAll(specification, pageRequest);
         CommonResult commonResult = new CommonResult();
