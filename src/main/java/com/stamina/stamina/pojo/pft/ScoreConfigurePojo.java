@@ -29,19 +29,19 @@ public class ScoreConfigurePojo {
      * 低值
      */
     @Column(name = "SCORECONFIGURE_LOW")
-    private String scoreconfigureLow;
+    private Long scoreconfigureLow;
 
     /**
      * 高值
      */
     @Column(name = "SCORECONFIGURE_HIGH")
-    private String scoreconfigureHigh;
+    private Long scoreconfigureHigh;
 
     /**
      * 分数
      */
     @Column(name = "SCORECONFIGURE_FRACTION")
-    private String scoreconfigureFraction;
+    private Long scoreconfigureFraction;
 
     /**
      * 测试项目清单ID
@@ -64,27 +64,27 @@ public class ScoreConfigurePojo {
         this.scoreconfigureId = scoreconfigureId;
     }
 
-    public String getScoreconfigureLow() {
+    public Long getScoreconfigureLow() {
         return scoreconfigureLow;
     }
 
-    public void setScoreconfigureLow(String scoreconfigureLow) {
+    public void setScoreconfigureLow(Long scoreconfigureLow) {
         this.scoreconfigureLow = scoreconfigureLow;
     }
 
-    public String getScoreconfigureHigh() {
+    public Long getScoreconfigureHigh() {
         return scoreconfigureHigh;
     }
 
-    public void setScoreconfigureHigh(String scoreconfigureHigh) {
+    public void setScoreconfigureHigh(Long scoreconfigureHigh) {
         this.scoreconfigureHigh = scoreconfigureHigh;
     }
 
-    public String getScoreconfigureFraction() {
+    public Long getScoreconfigureFraction() {
         return scoreconfigureFraction;
     }
 
-    public void setScoreconfigureFraction(String scoreconfigureFraction) {
+    public void setScoreconfigureFraction(Long scoreconfigureFraction) {
         this.scoreconfigureFraction = scoreconfigureFraction;
     }
 

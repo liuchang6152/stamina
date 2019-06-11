@@ -9,7 +9,8 @@ import javax.persistence.Query;
 import java.util.List;
 import java.util.Map;
 
-public class ProjectFractionRepositoryImpl extends BaseRepository<ProjectFractionPojo, Long> implements ProjectFractionRepositoryCustom {
+public class ProjectFractionRepositoryImpl extends BaseRepository<ProjectFractionPojo, Long>
+        implements ProjectFractionRepositoryCustom {
     @Override
     public String findCount() {
         String count = 1+"";
@@ -25,6 +26,13 @@ public class ProjectFractionRepositoryImpl extends BaseRepository<ProjectFractio
             count1++;
             count = count1.toString();
         }
+        if(count.length()==1){
+            count = "00"+count ;
+        }else if(count.length()==2){
+            count = "0"+count ;
+        }
         return count;
     }
+
+
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
 /*
  *
  * 模块编号：
@@ -27,8 +29,8 @@ public class PhysicalServiceController {
     private PhysicalService physicalService;
 
     @PostMapping()
-    public CommonResult physicalService(String json){
+    public CommonResult physicalServiceinfo(String json) throws ParseException {
 
-        return physicalService.physicalService(json);
+        return physicalService.physicalServiceinfo(json);
     }
 }

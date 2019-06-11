@@ -2,6 +2,8 @@ package com.stamina.stamina.service.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
 
+import java.text.ParseException;
+
 /**
  *
  * 模块编号：pcitc_ecs_bll_bc_AddressBookService
@@ -11,5 +13,5 @@ import com.stamina.stamina.common.util.CommonResult;
  * 描       述：体能服务
  */
 public interface PhysicalService {
-    CommonResult physicalService(String json);
+    CommonResult physicalServiceinfo(String json) throws ParseException;
 }

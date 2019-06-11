@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 修改编号：
  * 描述：测试项目分数
  */
-public interface ProjectFractionRepository extends JpaRepository<ProjectFractionPojo, Long> ,ProjectFractionRepositoryCustom {
+public interface ProjectFractionRepository extends JpaRepository<ProjectFractionPojo, Long>,ProjectFractionRepositoryCustom {
 
 
 }

@@ -108,7 +108,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         try {
             for (int i = 0; i < projectFormIds.length; i++) {
                 Long projectFormId = projectFormIds[i];
-                projectFormRepository.deleteById(projectFormId);
+                projectFormRepository.delete(projectFormId);
             }
             commonResult.setIsSuccess(true);
             commonResult.setMessage("删除成功！");
@@ -124,8 +124,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     public CommonResult getProjectById(Long projectFormId) {
         CommonResult commonResult = new CommonResult();
         try {
-            Optional<ProjectFormPojo> byId = projectFormRepository.findById(projectFormId);
-            ProjectFormPojo formPojo = byId.get();
+            ProjectFormPojo formPojo = projectFormRepository.findOne(projectFormId);
             ProjectFormEntity projectFormEntity = new ProjectFormEntity();
             projectFormEntity.setAbroadNameCode(formPojo.getAbroadNameCode());
             projectFormEntity.setProjectCompany(formPojo.getProjectCompany());
@@ -178,9 +177,9 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     public CommonResult updProjectSetting(ProjectSettingEntity entity) {
         CommonResult commonResult = new CommonResult();
         try {
-            Optional<ProjectFormPojo> byId = projectFormRepository.findById(entity.getProjectformId());
-            byId.get().setScoreconfigureMany(entity.getScoreconfigureMany());
-            projectFormRepository.save(byId.get());
+            ProjectFormPojo one = projectFormRepository.findOne(entity.getProjectformId());
+            one.setScoreconfigureMany(entity.getScoreconfigureMany());
+            projectFormRepository.save(one);
             List<ScoreConfigurePojo> byprojectFormId = scoreConfigureRepository.findByprojectFormId(entity.getProjectformId());
             for (ScoreConfigurePojo scoreConfigurePojo : byprojectFormId) {
                 scoreConfigureRepository.delete(scoreConfigurePojo);
