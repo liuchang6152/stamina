@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 模板编号：
@@ -24,6 +25,12 @@ public class ProjectRawDataController {
     @Autowired
     private ProjectRawDataService projectRawDataService;
 
+    /***
+     * 根据批次号，
+     * @param rawprojectBatchcode
+     * @param rawprojectProplecode
+     * @return
+     */
     @GetMapping("/getProjectRawData/{rawprojectBatchcode}/{rawprojectProplecode}")
     public CommonResult getProjectRawData(@PathVariable String rawprojectBatchcode, @PathVariable String rawprojectProplecode) {
 
@@ -34,7 +41,7 @@ public class ProjectRawDataController {
      * 体能批次查询
      * @return
      */
-    @GetMapping
+    @GetMapping("/getPhysicalBatchQuery")
     public CommonResult physicalBatchQuery() {
 
         return projectRawDataService.physicalBatchQuery();

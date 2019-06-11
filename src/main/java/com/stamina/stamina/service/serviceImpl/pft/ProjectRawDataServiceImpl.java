@@ -9,13 +9,19 @@ import com.stamina.stamina.entity.pft.ProjectRawDataEntity;
 import com.stamina.stamina.pojo.pft.ProjectRawDataPojo;
 import com.stamina.stamina.service.pft.ProjectRawDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 模板编号：
@@ -72,7 +78,8 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
 
             List<PhysicalBatchQueryEntity> returnList = new ArrayList<>();
 
-            List<Object[]> list = projectRawDataRepository.physicalBatchQuery();
+             List<Object[]> list = projectRawDataRepository.physicalBatchQuery();
+
             for (int i=0; i<list.size(); i++) {
                 PhysicalBatchQueryEntity entity = new PhysicalBatchQueryEntity();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");

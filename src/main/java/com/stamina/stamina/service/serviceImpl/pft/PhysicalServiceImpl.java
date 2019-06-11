@@ -8,8 +8,6 @@ import com.stamina.stamina.service.pft.PhysicalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.stereotype.Service;
-
-import javax.xml.ws.Action;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -37,7 +35,7 @@ public class PhysicalServiceImpl implements PhysicalService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String dateStr = sdf.format(date);
         StringBuffer str = new StringBuffer("");
-        String fatch = projectFractionRepository.findCount();
+        //String fatch = projectFractionRepository.findCount();
         //str.append("   ")
 
 
