@@ -90,4 +90,56 @@ public class BaseRepository<T, ID extends Serializable> {
 	}
 
 
+	/**
+	 * 获取分页数据
+	 *
+	 * @param page
+	 *            分页参数
+	 * @param jpql
+	 *            hql语句
+	 * @param paramList
+	 *            参数列表
+	 * @return 分页数据
+	 * @author pcitc 2017-09-18
+	 */
+	public PaginationBean<org.hibernate.mapping.List> findAllCustom(Pagination page, String jpql, Map<String, Object> paramList) {
+		Long count = getCount(jpql, paramList);
+		PaginationBean<org.hibernate.mapping.List> resultList = new PaginationBean<org.hibernate.mapping.List>(page, count);
+		Query query = this.entityManager.createQuery(jpql);
+
+		this.setParameterList(query, paramList);
+		query.setFirstResult(resultList.getBeginIndex()).setMaxResults(resultList.getPageSize());
+		resultList.setPageList(query.getResultList());
+		return resultList;
+	}
+
+	/**
+	 * 获取分页数据的总量
+	 *
+	 * @param jpql
+	 *            查询语句
+	 * @param paramList
+	 *            参数列表
+	 * @return 数据条数
+	 * @author pcitc 2017-09-18
+	 */
+	protected long getCount(String jpql, Map<String, Object> paramList) {
+		String countHql = CountHqlBuilder.toCountHql(jpql);
+		TypedQuery<Long> query = this.entityManager.createQuery(countHql, Long.class);
+		this.setParameterList(query, paramList);
+		if (query.getResultList().size() == 0)
+			return 0;
+		else{
+			TypedQuery<Long> createQuery = this.entityManager.createQuery(countHql, Long.class);
+			this.setParameterList(createQuery, paramList);
+
+			if (createQuery.getResultList().size() > 1) {
+				return Long.parseLong(createQuery.getResultList().size()+"");
+			}
+
+			return createQuery.getSingleResult();
+		}
+
+
+	}
 }

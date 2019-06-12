@@ -15,7 +15,7 @@ import java.util.List;
  * 修改编号：
  * 描述：测试项目原始属性
  */
-public interface ProjectRawDataRepository extends JpaRepository<ProjectRawDataPojo, Long>, JpaSpecificationExecutor {
+public interface ProjectRawDataRepository extends JpaRepository<ProjectRawDataPojo, Long>, JpaSpecificationExecutor, ProjectRawDataRepositoryCustom {
 
     List<ProjectRawDataPojo> findByRawprojectBatchcodeAndRawprojectProplecode(String rawprojectBatchcode, String rawprojectProplecode);
 

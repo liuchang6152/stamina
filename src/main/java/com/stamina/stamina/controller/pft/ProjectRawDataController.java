@@ -1,6 +1,8 @@
 package com.stamina.stamina.controller.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.Pagination;
+import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.entity.pft.PhysicalBatchQueryEntity;
 import com.stamina.stamina.entity.pft.ProjectRawDataEntity;
 import com.stamina.stamina.service.pft.ProjectRawDataService;
@@ -42,9 +44,19 @@ public class ProjectRawDataController {
      * 体能批次查询
      * @return
      */
-    @GetMapping("/getPhysicalBatchQuery")
+    @GetMapping("/getPhysicalBatchQuery2")
     public List<PhysicalBatchQueryEntity> physicalBatchQuery() {
 
         return projectRawDataService.physicalBatchQuery();
     }
+
+    /****
+     * 体能批次查询分页加条件筛选
+     */
+    @GetMapping("/getPhysicalBatchQuery")
+    public PaginationBean<PhysicalBatchQueryEntity> physicalBatchQuery2(String rawprojectBatchcode, String beginTime, String endTime, Pagination page) throws Exception{
+
+        return projectRawDataService.physicalBatchQuery2(rawprojectBatchcode, beginTime, endTime, page);
+    }
+
 }

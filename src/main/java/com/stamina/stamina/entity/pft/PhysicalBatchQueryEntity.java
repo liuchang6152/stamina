@@ -25,7 +25,7 @@ public class PhysicalBatchQueryEntity {
     /***
      * 测试人数
      */
-    private BigInteger testNumber;
+    private Long testNumber;
 
     /**
      * 批次上传时间
@@ -48,11 +48,11 @@ public class PhysicalBatchQueryEntity {
         this.rawprojectBatchcode = rawprojectBatchcode;
     }
 
-    public BigInteger getTestNumber() {
+    public Long getTestNumber() {
         return testNumber;
     }
 
-    public void setTestNumber(BigInteger testNumber) {
+    public void setTestNumber(Long testNumber) {
         this.testNumber = testNumber;
     }
 

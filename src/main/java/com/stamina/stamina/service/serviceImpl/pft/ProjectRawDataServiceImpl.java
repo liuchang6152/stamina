@@ -2,6 +2,8 @@ package com.stamina.stamina.service.serviceImpl.pft;
 
 import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.Pagination;
+import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.dao.pft.ProjectRawDataRepository;
 import com.stamina.stamina.dao.pft.TestersAttributeRepository;
 import com.stamina.stamina.entity.pft.PhysicalBatchQueryEntity;
@@ -71,7 +73,7 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
             Object[] objects = list.get(i);
             entity.setProjectrawdataId(i+1L);
             entity.setRawprojectBatchcode((String) objects[0]);
-            entity.setTestNumber((BigInteger) objects[1]);
+            //entity.setTestNumber((BigInteger) objects[1]);
             entity.setRawprojectTime(sdf.format((Date) objects[2]));
             returnList.add(entity);
         }
@@ -79,5 +81,26 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
 
         return returnList;
     }
+
+    @Override
+    public PaginationBean<PhysicalBatchQueryEntity> physicalBatchQuery2(String rawprojectBatchcode, String beginTime, String endTime, Pagination page) throws Exception{
+        PaginationBean<org.hibernate.mapping.List> physical = projectRawDataRepository.physicalBatchQuery2(rawprojectBatchcode, beginTime, endTime, page);
+        ArrayList list = (ArrayList) physical.getPageList();
+        PaginationBean<PhysicalBatchQueryEntity> returnEntity = new PaginationBean<>(page, physical.getTotal());
+        List<PhysicalBatchQueryEntity> physicalList = new ArrayList<>();
+        for (int i=0; i<list.size(); i++) {
+            PhysicalBatchQueryEntity entity = new PhysicalBatchQueryEntity();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
+            Object[] objects = (Object[]) list.get(i);
+            entity.setProjectrawdataId(i+1L);
+            entity.setRawprojectBatchcode((String) objects[0]);
+            entity.setTestNumber((Long) objects[1]);
+            entity.setRawprojectTime(sdf.format((Date) objects[2]));
+            physicalList.add(entity);
+        }
+        returnEntity.setPageList(physicalList);
+        return returnEntity;
+    }
+
 
 }

@@ -1,6 +1,8 @@
 package com.stamina.stamina.service.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.Pagination;
+import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.entity.pft.PhysicalBatchQueryEntity;
 import com.stamina.stamina.entity.pft.ProjectRawDataEntity;
 
@@ -18,4 +20,6 @@ public interface ProjectRawDataService {
     List<ProjectRawDataEntity> getProjectRawData(String rawprojectBatchcode, String rawprojectProplecode);
 
     List<PhysicalBatchQueryEntity> physicalBatchQuery();
+
+    PaginationBean<PhysicalBatchQueryEntity> physicalBatchQuery2(String rawprojectBatchcode, String beginTime, String endTime, Pagination page) throws Exception;
 }
