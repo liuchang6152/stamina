@@ -44,6 +44,12 @@ public class TestersAttributeEntity {
      */
     private Long testersTotalScore;
 
+    //人员身份证code
+    private String rawprojectPeoplecode;
+
+    //批次code
+    private String rawprojectBatchcode;
+
     public Integer getTestersattributeId() {
         return testersattributeId;
     }
@@ -98,5 +104,21 @@ public class TestersAttributeEntity {
 
     public void setTestersTotalScore(Long testersTotalScore) {
         this.testersTotalScore = testersTotalScore;
+    }
+
+    public String getRawprojectPeoplecode() {
+        return rawprojectPeoplecode;
+    }
+
+    public void setRawprojectPeoplecode(String rawprojectPeoplecode) {
+        this.rawprojectPeoplecode = rawprojectPeoplecode;
+    }
+
+    public String getRawprojectBatchcode() {
+        return rawprojectBatchcode;
+    }
+
+    public void setRawprojectBatchcode(String rawprojectBatchcode) {
+        this.rawprojectBatchcode = rawprojectBatchcode;
     }
 }

@@ -56,6 +56,8 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
                 entity.setTestersWeight(pojo.getTestersWeight());
                 entity.setUserIdCard(pojo.getUserIdcard());
                 entity.setTestersTotalScore(pojo.getTestersTotalscore());
+                entity.setRawprojectPeoplecode(pojo.getRawprojectPeoplecode());
+                entity.setRawprojectBatchcode(pojo.getRawprojectBatchcode());
                 list.add(entity);
             }
 
