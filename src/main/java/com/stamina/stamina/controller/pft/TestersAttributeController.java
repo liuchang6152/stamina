@@ -1,6 +1,7 @@
 package com.stamina.stamina.controller.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.service.pft.TestersAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,11 @@ public class TestersAttributeController {
      * @return
      */
 
-    @PostMapping(value = "/search/{pageNum}/{pageSize}")
-    private PaginationBean getTestersList(@RequestBody Map searchMap, @PathVariable int pageNum, @PathVariable int pageSize) throws Exception {
-
-        return testersAttributeService.getTestersList(searchMap, pageNum, pageSize);
+    @GetMapping(value = "/search")
+    private PaginationBean getTestersList(Map searchMap, Pagination page) throws Exception {
+        int pageNum = page.getPageIndex();
+        int pageSize = page.getPageSize();
+        return testersAttributeService.getTestersList(searchMap, pageNum+1, pageSize);
     }
 
 }
