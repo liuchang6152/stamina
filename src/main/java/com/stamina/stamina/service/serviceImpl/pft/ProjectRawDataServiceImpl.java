@@ -70,11 +70,7 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
     }
 
     @Override
-    public CommonResult physicalBatchQuery() {
-
-        CommonResult commonResult = new CommonResult();
-
-        try {
+    public List<PhysicalBatchQueryEntity> physicalBatchQuery() {
 
             List<PhysicalBatchQueryEntity> returnList = new ArrayList<>();
 
@@ -91,15 +87,8 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
                 returnList.add(entity);
             }
 
-            commonResult.setResult(returnList);
-            commonResult.setIsSuccess(true);
-            commonResult.setMessage("查询成功");
-        } catch (Exception e) {
-            commonResult.setIsSuccess(false);
-            commonResult.setMessage("查询失败");
-        }
 
-        return commonResult;
+        return returnList;
     }
 
 }

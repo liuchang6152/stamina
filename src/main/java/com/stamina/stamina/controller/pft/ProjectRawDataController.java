@@ -1,6 +1,7 @@
 package com.stamina.stamina.controller.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.entity.pft.PhysicalBatchQueryEntity;
 import com.stamina.stamina.entity.pft.ProjectRawDataEntity;
 import com.stamina.stamina.service.pft.ProjectRawDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class ProjectRawDataController {
      * @return
      */
     @GetMapping("/getPhysicalBatchQuery")
-    public CommonResult physicalBatchQuery() {
+    public List<PhysicalBatchQueryEntity> physicalBatchQuery() {
 
         return projectRawDataService.physicalBatchQuery();
     }
