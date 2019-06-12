@@ -26,10 +26,8 @@ public class ProjectFractionServiceImpl implements ProjectFractionService {
     private ProjectFractionRepository projectFractionRepository;
 
     @Override
-    public CommonResult getProjectFractioList(String projectBatchcode, String rawprojectPeoplecode) throws Exception {
+    public List<ProjectFractionEntity> getProjectFractioList(String projectBatchcode, String rawprojectPeoplecode) throws Exception {
 
-        CommonResult commonResult = new CommonResult();
-        try {
             List<ProjectFractionEntity> projectFractionEntityList = new ArrayList<>();
             List<ProjectFractionPojo> list = projectFractionRepository.findByProjectBatchcodeAndRawprojectPeoplecode(projectBatchcode, rawprojectPeoplecode);
             for (ProjectFractionPojo pojo : list) {
@@ -41,13 +39,7 @@ public class ProjectFractionServiceImpl implements ProjectFractionService {
                 projectFractionEntity.setProjectFraction(pojo.getProjectFraction());
                 projectFractionEntityList.add(projectFractionEntity);
             }
-            commonResult.setResult(projectFractionEntityList);
-            commonResult.setIsSuccess(true);
-            commonResult.setMessage("查询成功");
-        } catch (Exception e) {
-            commonResult.setIsSuccess(false);
-            commonResult.setMessage("查询失败");
-        }
-        return commonResult;
+
+        return projectFractionEntityList;
     }
 }

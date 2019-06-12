@@ -1,6 +1,9 @@
 package com.stamina.stamina.service.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.entity.pft.ProjectFractionEntity;
+
+import java.util.List;
 
 /**
  * 模板编号：
@@ -10,5 +13,5 @@ import com.stamina.stamina.common.util.CommonResult;
  * 描述：
  */
 public interface ProjectFractionService {
-    CommonResult getProjectFractioList(String projectBatchcode, String rawprojectPeoplecode) throws Exception;
+    List<ProjectFractionEntity> getProjectFractioList(String projectBatchcode, String rawprojectPeoplecode) throws Exception;
 }

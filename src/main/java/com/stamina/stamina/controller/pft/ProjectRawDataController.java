@@ -33,7 +33,7 @@ public class ProjectRawDataController {
      * @return
      */
     @GetMapping("/getProjectRawData/{rawprojectBatchcode}/{rawprojectProplecode}")
-    public CommonResult getProjectRawData(@PathVariable String rawprojectBatchcode, @PathVariable String rawprojectProplecode) {
+    public List<ProjectRawDataEntity> getProjectRawData(@PathVariable String rawprojectBatchcode, @PathVariable String rawprojectProplecode) {
 
         return projectRawDataService.getProjectRawData(rawprojectBatchcode, rawprojectProplecode);
     }

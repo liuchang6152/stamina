@@ -40,52 +40,41 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
     private TestersAttributeRepository testersAttributeRepository;
 
     @Override
-    public CommonResult getProjectRawData(String rawprojectBatchcode, String rawprojectProplecode) {
+    public List<ProjectRawDataEntity> getProjectRawData(String rawprojectBatchcode, String rawprojectProplecode) {
 
-        CommonResult commonResult = new CommonResult();
-
-        List<ProjectRawDataEntity> list = null;
-        try {
-            List<ProjectRawDataPojo> pojoList = projectRawDataRepository.findByRawprojectBatchcodeAndRawprojectProplecode(rawprojectBatchcode, rawprojectProplecode);
-            list = new ArrayList();
-            for (ProjectRawDataPojo pojo : pojoList) {
-                ProjectRawDataEntity entity = new ProjectRawDataEntity();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
-                entity.setProjectrawdataId(pojo.getProjectrawdataId());
-                entity.setRawprojectName(pojo.getRawprojectName());
-                entity.setRawprojectValue(pojo.getRawprojectValue());
-                entity.setRawprojectCompany(CommonEnum.Unit.getName(Integer.parseInt(pojo.getRawprojectCompany())));
-                entity.setRawprojectTime(sdf.format(pojo.getRawprojectTime()));
-                list.add(entity);
-            }
-            commonResult.setResult(list);
-            commonResult.setIsSuccess(true);
-            commonResult.setMessage("查询成功");
-        } catch (NumberFormatException e) {
-            commonResult.setIsSuccess(false);
-            commonResult.setMessage("查询失败");
+        List<ProjectRawDataEntity> list = new ArrayList();
+        List<ProjectRawDataPojo> pojoList = projectRawDataRepository.findByRawprojectBatchcodeAndRawprojectProplecode(rawprojectBatchcode, rawprojectProplecode);
+        for (ProjectRawDataPojo pojo : pojoList) {
+            ProjectRawDataEntity entity = new ProjectRawDataEntity();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
+            entity.setProjectrawdataId(pojo.getProjectrawdataId());
+            entity.setRawprojectName(pojo.getRawprojectName());
+            entity.setRawprojectValue(pojo.getRawprojectValue());
+            entity.setRawprojectCompany(CommonEnum.Unit.getName(Integer.parseInt(pojo.getRawprojectCompany())));
+            entity.setRawprojectTime(sdf.format(pojo.getRawprojectTime()));
+            list.add(entity);
         }
 
-        return commonResult;
+        return list;
     }
 
     @Override
     public List<PhysicalBatchQueryEntity> physicalBatchQuery() {
 
-            List<PhysicalBatchQueryEntity> returnList = new ArrayList<>();
+        List<PhysicalBatchQueryEntity> returnList = new ArrayList<>();
 
-             List<Object[]> list = projectRawDataRepository.physicalBatchQuery();
+        List<Object[]> list = projectRawDataRepository.physicalBatchQuery();
 
-            for (int i=0; i<list.size(); i++) {
-                PhysicalBatchQueryEntity entity = new PhysicalBatchQueryEntity();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
-                Object[] objects = list.get(i);
-                entity.setProjectrawdataId(i+1L);
-                entity.setRawprojectBatchcode((String) objects[0]);
-                entity.setTestNumber((BigInteger) objects[1]);
-                entity.setRawprojectTime(sdf.format((Date) objects[2]));
-                returnList.add(entity);
-            }
+        for (int i=0; i<list.size(); i++) {
+            PhysicalBatchQueryEntity entity = new PhysicalBatchQueryEntity();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
+            Object[] objects = list.get(i);
+            entity.setProjectrawdataId(i+1L);
+            entity.setRawprojectBatchcode((String) objects[0]);
+            entity.setTestNumber((BigInteger) objects[1]);
+            entity.setRawprojectTime(sdf.format((Date) objects[2]));
+            returnList.add(entity);
+        }
 
 
         return returnList;

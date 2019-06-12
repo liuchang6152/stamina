@@ -1,10 +1,13 @@
 package com.stamina.stamina.controller.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.entity.pft.ProjectFractionEntity;
 import com.stamina.stamina.service.pft.ProjectFractionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 模板编号：
@@ -26,7 +29,7 @@ public class ProjectFractionController {
      * 初始化测试项目分数表
      */
     @GetMapping("/getProjectFractioList/{projectBatchcode}/{rawprojectPeoplecode}")
-    public CommonResult getProjectFractioList(@PathVariable String projectBatchcode, @PathVariable String rawprojectPeoplecode) throws Exception {
+    public List<ProjectFractionEntity> getProjectFractioList(@PathVariable String projectBatchcode, @PathVariable String rawprojectPeoplecode) throws Exception {
 
         return projectFractionService.getProjectFractioList(projectBatchcode, rawprojectPeoplecode);
     }
