@@ -2,6 +2,7 @@ package com.stamina.stamina.service.serviceImpl.pft;
 
 import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.dao.pft.TestersAttributeRepository;
 import com.stamina.stamina.entity.pft.TestersAttributeEntity;
 import com.stamina.stamina.pojo.pft.TestersAttributePojo;
@@ -33,18 +34,15 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
     private TestersAttributeRepository testersAttributeRepository;
 
     @Override
-    public CommonResult getTestersList(Map searchMap, int pageNum, int pageSize) throws Exception {
+    public PaginationBean getTestersList(Map searchMap, int pageNum, int pageSize) throws Exception {
 
+        PaginationBean paginationBean = new PaginationBean();
         Specification specification = createSpecification(searchMap);
-
         //按总分倒序
         Sort sort = new Sort(Sort.Direction.DESC, "testersTotalscore");
         PageRequest pageRequest = new PageRequest(pageNum-1, pageSize, sort);
-
         Page page = testersAttributeRepository.findAll(specification, pageRequest);
-        CommonResult commonResult = new CommonResult();
 
-        try {
             List<TestersAttributePojo> content = page.getContent();
             Long totalElements = page.getTotalElements();
 
@@ -61,15 +59,9 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
                 list.add(entity);
             }
 
-            commonResult.setResult(list);
-            commonResult.setResourceCode(String.valueOf(totalElements));
-            commonResult.setIsSuccess(true);
-            commonResult.setMessage("查询成功");
-        } catch (Exception e) {
-            commonResult.setIsSuccess(false);
-            commonResult.setMessage("查询失败");
-        }
-        return commonResult;
+         paginationBean.setPageList(list);
+         paginationBean.setTotal(page.getTotalElements());
+        return paginationBean;
     }
 
     //testersName testersGender  testersTotalscore

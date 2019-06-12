@@ -1,6 +1,7 @@
 package com.stamina.stamina.service.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.PaginationBean;
 import org.springframework.data.domain.Page;
 
 import java.util.Map;
@@ -14,6 +15,6 @@ import java.util.Map;
  */
 public interface TestersAttributeService {
 
-    CommonResult getTestersList(Map searchMap, int pageNum, int pageSize) throws Exception;
+    PaginationBean getTestersList(Map searchMap, int pageNum, int pageSize) throws Exception;
 
 }
