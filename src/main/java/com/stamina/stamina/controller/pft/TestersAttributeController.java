@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -33,9 +34,15 @@ public class TestersAttributeController {
      */
 
     @GetMapping(value = "/search")
-    private PaginationBean getTestersList(Map searchMap, Pagination page) throws Exception {
+    private PaginationBean getTestersList(String testersName, String testersGender,
+                                          Long beginScore, Long endScore, Pagination page) throws Exception {
         int pageNum = page.getPageIndex();
         int pageSize = page.getPageSize();
+        Map searchMap = new HashMap();
+        searchMap.put("testersName", testersName);
+        searchMap.put("testersGender", testersGender);
+        searchMap.put("beginScore", beginScore);
+        searchMap.put("endScore", endScore);
         return testersAttributeService.getTestersList(searchMap, pageNum+1, pageSize);
     }
 
