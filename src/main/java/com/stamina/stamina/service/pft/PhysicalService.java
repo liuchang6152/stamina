@@ -13,5 +13,7 @@ import java.text.ParseException;
  * 描       述：体能服务
  */
 public interface PhysicalService {
-    CommonResult physicalServiceinfo(String json) throws ParseException;
+    CommonResult physicalServiceinfo(String json) throws Exception;
+
+    CommonResult recalculate(String batch) throws Exception;
 }

@@ -5,10 +5,7 @@ import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.service.pft.PhysicalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 /*
@@ -29,8 +26,13 @@ public class PhysicalServiceController {
     private PhysicalService physicalService;
 
     @PostMapping()
-    public CommonResult physicalServiceinfo(String json) throws ParseException {
+    public CommonResult physicalServiceinfo(@RequestBody String json) throws Exception {
 
         return physicalService.physicalServiceinfo(json);
+    }
+
+    @GetMapping
+    public CommonResult recalculate(String batch )throws Exception{
+        return physicalService.recalculate(batch);
     }
 }
