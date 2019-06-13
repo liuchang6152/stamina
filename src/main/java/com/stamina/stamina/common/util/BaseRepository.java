@@ -2,6 +2,7 @@ package com.stamina.stamina.common.util;
 
 
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -141,5 +142,19 @@ public class BaseRepository<T, ID extends Serializable> {
 		}
 
 
+	}
+
+	/**
+	 * 处理Like语句
+	 *
+	 * @param name
+	 *            sql字符串
+	 * @return 处理完的字符串
+	 * @author pcitc 2017-09-18
+	 */
+	protected String sqlLikeReplace(String name) {
+		if (StringUtils.isEmpty(name))
+			return "";
+		return name.replace("/", "//").replace("%", "/%").replace("_", "/_");
 	}
 }

@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.Query;
  * 修改编号：
  * 描述：测试人员表
  */
-public interface TestersAttributeRepository extends JpaRepository<TestersAttributePojo, Integer>,JpaSpecificationExecutor<TestersAttributePojo> {
+public interface TestersAttributeRepository extends JpaRepository<TestersAttributePojo, Integer>,JpaSpecificationExecutor<TestersAttributePojo>,TestersAttributeRepositoryCustom {
 
     @Query(value = "SELECT COUNT(*) FROM t_pft_projectrawdata WHERE RAWPROJECT_BATCHCODE = ?", nativeQuery = true)
     int findCount(String rawprojectBatchcode) throws Exception;

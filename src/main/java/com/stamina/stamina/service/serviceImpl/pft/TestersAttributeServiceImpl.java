@@ -2,6 +2,7 @@ package com.stamina.stamina.service.serviceImpl.pft;
 
 import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.dao.pft.TestersAttributeRepository;
 import com.stamina.stamina.entity.pft.TestersAttributeEntity;
@@ -91,5 +92,32 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
                 return cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
             }
         };
+    }
+
+    @Override
+    public PaginationBean<TestersAttributeEntity> getTestersList2(String rawprojectBatchcode, String testersName, String testersGender, Long beginScore, Long endScore, Pagination page) throws Exception {
+
+        PaginationBean<org.hibernate.mapping.List> testers = testersAttributeRepository.getTestersList2(rawprojectBatchcode, testersName, testersGender, beginScore, endScore, page);
+        ArrayList list = (ArrayList) testers.getPageList();
+        PaginationBean<TestersAttributeEntity> returnEntity = new PaginationBean<>(page, testers.getTotal());
+        List<TestersAttributeEntity> testersAttributeEntityList = new ArrayList<>();
+        for (int i=0; i<list.size(); i++) {
+            TestersAttributePojo pojo = (TestersAttributePojo) list.get(i);
+            TestersAttributeEntity entity = new TestersAttributeEntity();
+            entity.setTestersattributeId(pojo.getTestersattributeId());
+            entity.setTestersName(pojo.getTestersName());
+            if (pojo.getTestersGender() != null) {
+                entity.setTestersGender(CommonEnum.TestersSexEnum.getName(Integer.parseInt(pojo.getTestersGender())));
+            }
+            entity.setTestersHeight(pojo.getTestersHeight());
+            entity.setTestersWeight(pojo.getTestersWeight());
+            entity.setUserIdCard(pojo.getUserIdcard());
+            entity.setTestersTotalScore(pojo.getTestersTotalscore());
+            entity.setRawprojectPeoplecode(pojo.getRawprojectPeoplecode());
+            entity.setRawprojectBatchcode(pojo.getRawprojectBatchcode());
+            testersAttributeEntityList.add(entity);
+        }
+        returnEntity.setPageList(testersAttributeEntityList);
+        return returnEntity;
     }
 }

@@ -3,6 +3,7 @@ package com.stamina.stamina.controller.pft;
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.common.util.PaginationBean;
+import com.stamina.stamina.entity.pft.TestersAttributeEntity;
 import com.stamina.stamina.service.pft.TestersAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -33,7 +34,7 @@ public class TestersAttributeController {
      * @return
      */
 
-    @GetMapping(value = "/search")
+    @GetMapping(value = "/search2")
     private PaginationBean getTestersList(String testersName, String testersGender,
                                           Long beginScore, Long endScore, String rawprojectBatchcode, Pagination page) throws Exception {
         int pageNum = page.getPageIndex();
@@ -45,6 +46,20 @@ public class TestersAttributeController {
         searchMap.put("endScore", endScore);
         searchMap.put("rawprojectBatchcode", rawprojectBatchcode);
         return testersAttributeService.getTestersList(searchMap, pageNum+1, pageSize);
+    }
+
+    /**
+     * 体能人员查询2
+     * @param
+     * @param
+     * @return
+     */
+
+    @GetMapping(value = "/search")
+    private PaginationBean<TestersAttributeEntity> getTestersList2(String rawprojectBatchcode, String testersName, String testersGender,
+                                                                   Long beginScore, Long endScore, Pagination page) throws Exception {
+
+        return testersAttributeService.getTestersList2(rawprojectBatchcode, testersName, testersGender, beginScore, endScore, page);
     }
 
 }
