@@ -35,7 +35,7 @@ public class TestersAttributeController {
 
     @GetMapping(value = "/search")
     private PaginationBean getTestersList(String testersName, String testersGender,
-                                          Long beginScore, Long endScore, String rawprojectPeoplecode, Pagination page) throws Exception {
+                                          Long beginScore, Long endScore, String rawprojectBatchcode, Pagination page) throws Exception {
         int pageNum = page.getPageIndex();
         int pageSize = page.getPageSize();
         Map searchMap = new HashMap();
@@ -43,7 +43,7 @@ public class TestersAttributeController {
         searchMap.put("testersGender", testersGender);
         searchMap.put("beginScore", beginScore);
         searchMap.put("endScore", endScore);
-        searchMap.put("rawprojectPeoplecode", rawprojectPeoplecode);
+        searchMap.put("rawprojectBatchcode", rawprojectBatchcode);
         return testersAttributeService.getTestersList(searchMap, pageNum+1, pageSize);
     }
 
