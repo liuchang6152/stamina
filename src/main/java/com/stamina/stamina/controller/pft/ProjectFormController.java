@@ -94,8 +94,8 @@ public class ProjectFormController {
     /**
      * 修改项目清单配置信息
      */
-    @GetMapping("updProjectSetting")
-    public CommonResult updProjectSetting(ProjectSettingEntity entity){
+    @PutMapping("updProjectSetting")
+    public CommonResult updProjectSetting(@RequestBody ProjectSettingEntity entity){
         return projectFormService.updProjectSetting(entity);
     }
 
