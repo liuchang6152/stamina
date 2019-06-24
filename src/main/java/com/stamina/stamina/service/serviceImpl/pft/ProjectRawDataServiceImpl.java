@@ -52,7 +52,7 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
             entity.setProjectrawdataId(pojo.getProjectrawdataId());
             entity.setRawprojectName(pojo.getRawprojectName());
             entity.setRawprojectValue(pojo.getRawprojectValue());
-            entity.setRawprojectCompany(CommonEnum.Unit.getName(Integer.parseInt(pojo.getRawprojectCompany())));
+            entity.setRawprojectCompany(pojo.getRawprojectCompany());
             entity.setRawprojectTime(sdf.format(pojo.getRawprojectTime()));
             list.add(entity);
         }
