@@ -54,6 +54,8 @@
             <groupId>pcitc</groupId>
             <artifactId>ettool</artifactId>
             <version>1.2.7</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/ettool-1.2.7.jar</systemPath>
         </dependency>
     </dependencies>
 
