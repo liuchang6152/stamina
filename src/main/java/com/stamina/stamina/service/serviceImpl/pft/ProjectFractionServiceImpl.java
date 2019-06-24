@@ -35,7 +35,7 @@ public class ProjectFractionServiceImpl implements ProjectFractionService {
                 projectFractionEntity.setProjectfractionId(pojo.getProjectfractionId());
                 projectFractionEntity.setProjectName(pojo.getProjectName());
                 projectFractionEntity.setProjectValue(pojo.getProjectValue());
-                projectFractionEntity.setProjectCompany(CommonEnum.Unit.getName(Integer.parseInt(pojo.getProjectCompany())));
+                projectFractionEntity.setProjectCompany(pojo.getProjectCompany());
                 projectFractionEntity.setProjectFraction(pojo.getProjectFraction());
                 projectFractionEntityList.add(projectFractionEntity);
             }
