@@ -73,7 +73,7 @@ public class PhysicalServiceImpl implements PhysicalService {
                 projectRawDataPojo.setRawprojectValue(Long.valueOf(projectValue.toString()));
                 projectRawDataPojo.setRawprojectTime(format.parse(str.get(4)));
                 projectRawDataPojo.setRawprojectRepeatdata(str.get(5));
-//               projectRawDataRepository.save(projectRawDataPojo);
+                projectRawDataRepository.save(projectRawDataPojo);
             }
             commonResult = recalculate(code);
         }catch (Exception ex){

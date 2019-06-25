@@ -187,7 +187,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             for (ScoreConfigurePojo scoreConfigurePojo : entity.getScoreConfigurePojos()) {
                 scoreConfigureRepository.save(scoreConfigurePojo);
             }
-            commonResult.setResult("修改成功");
+            commonResult.setMessage("修改成功");
             commonResult.setIsSuccess(true);
         } catch (Exception ex){
             commonResult.setMessage("修改失败！");
