@@ -28,7 +28,7 @@ import java.util.Map.Entry;
 public class BaseRepository<T, ID extends Serializable> {
 
 	private Class<T> entityClass;
-	private EntityManager entityManager;
+	private  EntityManager entityManager;
 
 	/**
 	 * 注入EntityManager，同时实例化SimpleJpaRepository
