@@ -155,6 +155,11 @@ public class PhysicalServiceImpl implements PhysicalService {
                             score = scoreConfigurePojo.getScoreconfigureFraction();
                         }
                     }
+                    Example<ProjectFractionPojo> example1 = Example.of(projectFractionPojo);
+                    List<ProjectFractionPojo> all3 = projectFractionRepository.findAll(example1);
+                    if(all3!=null){
+                        projectFractionPojo.setProjectfractionId(all3.get(0).getProjectfractionId());
+                    }
                     projectFractionPojo.setProjectFraction(score);
                     projectFractionRepository.save(projectFractionPojo);
                 }
@@ -181,8 +186,10 @@ public class PhysicalServiceImpl implements PhysicalService {
                     testersAttributePojo1.setRawprojectPeoplecode(projectRawDataPojo1.getRawprojectProplecode());
                     testersAttributePojo1.setTestersName(projectRawDataPojo1.getRawprojectBatchcode());
                     testersAttributeRepository.save(testersAttributePojo1);
+
                 }
             }
+
             //计算总分
             TestersAttributePojo testersAttributePojo1 = new TestersAttributePojo();
             testersAttributePojo1.setRawprojectBatchcode(batch);
