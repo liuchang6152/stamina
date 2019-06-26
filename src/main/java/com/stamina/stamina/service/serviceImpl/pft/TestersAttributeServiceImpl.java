@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -106,7 +107,7 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
             TestersAttributeEntity entity = new TestersAttributeEntity();
             entity.setTestersattributeId(pojo.getTestersattributeId());
             entity.setTestersName(pojo.getTestersName());
-            if (pojo.getTestersGender() != null) {
+            if (!StringUtils.isEmpty(pojo.getTestersGender())) {
                 entity.setTestersGender(CommonEnum.TestersSexEnum.getName(Integer.parseInt(pojo.getTestersGender())));
             }
             entity.setTestersHeight(pojo.getTestersHeight());
