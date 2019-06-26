@@ -221,7 +221,7 @@ public class PhysicalServiceImpl implements PhysicalService {
                 Example<ProjectFractionPojo> pojoExample = Example.of(projectFractionPojo1);
                 List<ProjectFractionPojo> all3 = projectFractionRepository.findAll(pojoExample);
                 for (ProjectFractionPojo projectFractionPojo : all3) {
-                    score = score + projectFractionPojo.getProjectValue();
+                    score = score + projectFractionPojo.getProjectFraction();
                 }
                 testersAttributePojo.setTestersTotalscore(score);
                 testersAttributeRepository.save(testersAttributePojo);
