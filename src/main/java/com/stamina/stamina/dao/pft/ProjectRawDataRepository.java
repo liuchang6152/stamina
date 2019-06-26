@@ -17,6 +17,9 @@ import java.util.List;
  */
 public interface ProjectRawDataRepository extends JpaRepository<ProjectRawDataPojo, Long>, JpaSpecificationExecutor, ProjectRawDataRepositoryCustom {
 
+    // @Query(value = "select * FROM t_pft_projectrawdata a WHERE a.RAWPROJECT_BATCHCODE =?1 AND a.RAWPROJECT_PROPLECODE =?2  ORDER BY CONVERT (a.RAWPROJECT_NAME USING gbk) COLLATE gbk_chinese_ci ASC",nativeQuery = true)
+    // 根据 RAWPROJECT_NAME 字段的长短 降序
+    @Query(value = "select * FROM t_pft_projectrawdata a WHERE a.RAWPROJECT_BATCHCODE =?1 AND a.RAWPROJECT_PROPLECODE =?2  ORDER BY LENGTH(a.RAWPROJECT_NAME) ", nativeQuery = true)
     List<ProjectRawDataPojo> findByRawprojectBatchcodeAndRawprojectProplecode(String rawprojectBatchcode, String rawprojectProplecode);
 
     @Query(value = "SELECT * FROM t_pft_physicalbatchquery", nativeQuery = true)
