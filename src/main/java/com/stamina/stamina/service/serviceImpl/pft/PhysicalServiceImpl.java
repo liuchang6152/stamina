@@ -115,6 +115,9 @@ public class PhysicalServiceImpl implements PhysicalService {
                     Integer scoreconfigureMany = projectFormPojo.getScoreconfigureMany();
                     //确定数值
                     Long value = rawDataPojo.getRawprojectValue();
+                    if(scoreconfigureMany==null){
+                        scoreconfigureMany= 3;
+                    }
                     switch (scoreconfigureMany) {
                         //最大值
                         case 0:
@@ -144,6 +147,10 @@ public class PhysicalServiceImpl implements PhysicalService {
                             }
                             value = value3 / all1.size();
                             break;
+                        //默认取值
+                        case 3:
+                            value = all1.get(0).getRawprojectValue();
+                            break;
                     }
                     projectFractionPojo.setProjectValue(value);
                     //判定分数
@@ -154,13 +161,25 @@ public class PhysicalServiceImpl implements PhysicalService {
                             score = scoreConfigurePojo.getScoreconfigureFraction();
                         }
                     }
-                    Example<ProjectFractionPojo> example1 = Example.of(projectFractionPojo);
+                    ProjectFractionPojo projectFractionPojo1 = new ProjectFractionPojo();
+                    projectFractionPojo1.setRawprojectPeoplecode(rawDataPojo.getRawprojectProplecode());
+                    projectFractionPojo1.setProjectBatchcode(batch);
+                    projectFractionPojo1.setProjectName(rawDataPojo.getRawprojectName());
+                    Example<ProjectFractionPojo> example1 = Example.of(projectFractionPojo1);
                     List<ProjectFractionPojo> all3 = projectFractionRepository.findAll(example1);
-                    if(all3!=null){
-                        projectFractionPojo.setProjectfractionId(all3.get(0).getProjectfractionId());
+                    if(all3!=null&&all3.size()>0){
+                        projectFractionPojo1.setProjectName(rawDataPojo.getRawprojectName());
+                        projectFractionPojo1.setProjectValue(rawDataPojo.getRawprojectValue());
+                        projectFractionPojo1.setProjectTime(rawDataPojo.getRawprojectTime());
+                        projectFractionPojo1.setProjectFraction(score);
+                        projectFractionPojo1.setProjectCompany(rawDataPojo.getRawprojectCompany());
+                        projectFractionPojo1.setProjectfractionId(all3.get(0).getProjectfractionId());
+                        projectFractionRepository.save(projectFractionPojo1);
+                    }else{
+                        projectFractionPojo.setProjectFraction(score);
+                        projectFractionRepository.save(projectFractionPojo);
                     }
-                    projectFractionPojo.setProjectFraction(score);
-                    projectFractionRepository.save(projectFractionPojo);
+
                 }
             }
 
@@ -213,7 +232,7 @@ public class PhysicalServiceImpl implements PhysicalService {
         }catch (Exception ex){
             ex.getMessage();
             commonResult.setMessage("失败！");
-            throw new Exception(ex.getMessage());
+//            throw new Exception(ex.getMessage());
         }
         return commonResult;
     }
