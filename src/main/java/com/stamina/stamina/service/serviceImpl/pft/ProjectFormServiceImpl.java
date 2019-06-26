@@ -49,8 +49,9 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
+            projectFormEntity.setProjectCompany(formPojo.getProjectCompany());
             if (formPojo.getScoreconfigureMany() != null) {
-                projectFormEntity.setScoreconfigureMany(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
+                projectFormEntity.setScoreconfigureManyName(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
             }
             entities.add(projectFormEntity);
         }
@@ -139,8 +140,9 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
+            projectFormEntity.setProjectCompany(formPojo.getProjectCompany());
             if (formPojo.getScoreconfigureMany() != null) {
-                projectFormEntity.setScoreconfigureMany(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
+                projectFormEntity.setScoreconfigureManyName(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
             }
             commonResult.setResult(projectFormEntity);
             commonResult.setIsSuccess(true);

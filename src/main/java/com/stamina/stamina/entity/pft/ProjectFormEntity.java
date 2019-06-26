@@ -39,7 +39,9 @@ public class ProjectFormEntity {
     /**
      *（0取最大值，1取最小值，2取平均值）
      */
-    private String scoreconfigureMany;
+    private Integer scoreconfigureMany;
+
+    private String scoreconfigureManyName;
 
     public Long getProjectformId() {
         return projectformId;
@@ -73,12 +75,20 @@ public class ProjectFormEntity {
         this.projectCompany = projectCompany;
     }
 
-    public String getScoreconfigureMany() {
+    public Integer getScoreconfigureMany() {
         return scoreconfigureMany;
     }
 
-    public void setScoreconfigureMany(String scoreconfigureMany) {
+    public void setScoreconfigureMany(Integer scoreconfigureMany) {
         this.scoreconfigureMany = scoreconfigureMany;
+    }
+
+    public String getScoreconfigureManyName() {
+        return scoreconfigureManyName;
+    }
+
+    public void setScoreconfigureManyName(String scoreconfigureManyName) {
+        this.scoreconfigureManyName = scoreconfigureManyName;
     }
 
     public String getProjectCompanyName() {
