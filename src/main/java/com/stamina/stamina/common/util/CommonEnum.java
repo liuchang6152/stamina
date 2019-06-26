@@ -9,6 +9,54 @@ package com.stamina.stamina.common.util;
  */
 public class CommonEnum {
 
+    /***
+     * 取值规则
+     */
+    public enum ScoreTypeEnum {
+        MAXVALUE("最大值", 0),
+        MINVALUE("最小值", 1),
+        AVGVALUE("平均值", 2);
+        private String name;
+        public static String getName(int index) {
+            for (ScoreTypeEnum c : ScoreTypeEnum.values()) {
+                if (c.getIndex() == index) {
+                    return c.name;
+                }
+            }
+            return "";
+        }
+        public static Integer getIndex(String name) {
+            for (ScoreTypeEnum c : ScoreTypeEnum.values()) {
+                if (c.getName().equals(name)) {
+                    return c.index;
+                }
+            }
+            return null;
+        }
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        private int index;
+
+        public String getName() {
+            return name;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        ScoreTypeEnum(String name, int index) {
+            this.name = name;
+            this.index = index;
+        }
+    }
+
     public enum TestersSexEnum {
         WoMen("男", 0),
         Men("女", 1);

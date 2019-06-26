@@ -2,6 +2,7 @@ package com.stamina.stamina.service.serviceImpl.pft;
 
 import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.dao.pft.ProjectFormRepository;
 import com.stamina.stamina.dao.pft.ScoreConfigureRepository;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
@@ -33,9 +34,13 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     @Autowired
     private ScoreConfigureRepository scoreConfigureRepository;
 
-
+    /**
+     * 获取清单列表
+     * @param page
+     * @return
+     */
     @Override
-    public List<ProjectFormEntity> getProjectFormList() {
+    public List<ProjectFormEntity> getProjectFormList(Pagination page) {
         List<ProjectFormEntity> entities = new ArrayList<>();
         List<ProjectFormPojo> all = projectFormRepository.findAll();
         for (ProjectFormPojo formPojo : all) {
@@ -44,7 +49,9 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
-            projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
+            if (formPojo.getScoreconfigureMany() != null) {
+                projectFormEntity.setScoreconfigureMany(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
+            }
             entities.add(projectFormEntity);
         }
         return entities;
@@ -108,6 +115,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         try {
             for (int i = 0; i < projectFormIds.length; i++) {
                 Long projectFormId = projectFormIds[i];
+                scoreConfigureRepository.deleteByProjectFormId(projectFormId);
                 projectFormRepository.delete(projectFormId);
             }
             commonResult.setIsSuccess(true);
@@ -131,7 +139,9 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
-            projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
+            if (formPojo.getScoreconfigureMany() != null) {
+                projectFormEntity.setScoreconfigureMany(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
+            }
             commonResult.setResult(projectFormEntity);
             commonResult.setIsSuccess(true);
         }catch (Exception ex){

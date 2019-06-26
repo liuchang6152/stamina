@@ -18,4 +18,6 @@ public interface ScoreConfigureRepository  extends JpaRepository<ScoreConfigureP
 
     List<ScoreConfigurePojo> findByprojectFormId(Long projectformId);
 
+    int deleteByProjectFormId(Long projectformId);
+
 }
