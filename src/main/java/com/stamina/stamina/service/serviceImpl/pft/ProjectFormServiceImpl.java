@@ -49,7 +49,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
-            projectFormEntity.setProjectCompany(formPojo.getProjectCompany());
+            projectFormEntity.setScoreconfigureMany(formPojo.getProjectCompany());
             if (formPojo.getScoreconfigureMany() != null) {
                 projectFormEntity.setScoreconfigureManyName(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
             }
@@ -140,7 +140,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
-            projectFormEntity.setProjectCompany(formPojo.getProjectCompany());
+            projectFormEntity.setScoreconfigureMany(formPojo.getProjectCompany());
             if (formPojo.getScoreconfigureMany() != null) {
                 projectFormEntity.setScoreconfigureManyName(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
             }
