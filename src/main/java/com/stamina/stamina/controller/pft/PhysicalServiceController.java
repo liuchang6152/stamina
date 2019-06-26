@@ -32,7 +32,7 @@ public class PhysicalServiceController {
     }
 
     @GetMapping
-    public CommonResult recalculate(String batch )throws Exception{
+    public CommonResult recalculate(Long [] batch )throws Exception{
         return physicalService.recalculate(batch);
     }
 }

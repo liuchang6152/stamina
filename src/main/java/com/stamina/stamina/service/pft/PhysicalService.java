@@ -15,5 +15,5 @@ import java.text.ParseException;
 public interface PhysicalService {
     CommonResult physicalServiceinfo(String json) throws Exception;
 
-    CommonResult recalculate(String batch) throws Exception;
+    CommonResult recalculate(Long [] batch) throws Exception;
 }

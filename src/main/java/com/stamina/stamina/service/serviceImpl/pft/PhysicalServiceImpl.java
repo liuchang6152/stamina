@@ -75,7 +75,7 @@ public class PhysicalServiceImpl implements PhysicalService {
                 projectRawDataPojo.setRawprojectRepeatdata(str.get(5));
                 projectRawDataRepository.save(projectRawDataPojo);
             }
-            commonResult = recalculate(code);
+            commonResult = recalculateService(code);
         }catch (Exception ex){
             ex.getMessage();
             commonResult.setMessage("失败！");
@@ -90,8 +90,7 @@ public class PhysicalServiceImpl implements PhysicalService {
      * 分数计算服务
      * @return
      */
-    @Override
-    public CommonResult recalculate(String batch) throws Exception{
+    public CommonResult recalculateService(String  batch) throws Exception{
         CommonResult commonResult = new CommonResult();
         try {
             //处理项目原始清单中的数据
@@ -219,4 +218,12 @@ public class PhysicalServiceImpl implements PhysicalService {
         return commonResult;
     }
 
+    @Override
+    public CommonResult recalculate(Long [] batch) throws Exception {
+        CommonResult commonResult = new CommonResult();
+        for (Long aLong : batch) {
+            commonResult = recalculateService(aLong.toString());
+        }
+        return commonResult;
+    }
 }
