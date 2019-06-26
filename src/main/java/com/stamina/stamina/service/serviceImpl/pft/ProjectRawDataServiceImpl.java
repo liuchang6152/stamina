@@ -48,7 +48,7 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
         List<ProjectRawDataPojo> pojoList = projectRawDataRepository.findByRawprojectBatchcodeAndRawprojectProplecode(rawprojectBatchcode, rawprojectProplecode);
         for (ProjectRawDataPojo pojo : pojoList) {
             ProjectRawDataEntity entity = new ProjectRawDataEntity();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             entity.setProjectrawdataId(pojo.getProjectrawdataId());
             entity.setRawprojectName(pojo.getRawprojectName());
             entity.setRawprojectValue(pojo.getRawprojectValue());
@@ -69,7 +69,7 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
 
         for (int i=0; i<list.size(); i++) {
             PhysicalBatchQueryEntity entity = new PhysicalBatchQueryEntity();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Object[] objects = list.get(i);
             entity.setProjectrawdataId(i+1L);
             entity.setRawprojectBatchcode((String) objects[0]);
@@ -90,7 +90,7 @@ public class ProjectRawDataServiceImpl implements ProjectRawDataService {
         List<PhysicalBatchQueryEntity> physicalList = new ArrayList<>();
         for (int i=0; i<list.size(); i++) {
             PhysicalBatchQueryEntity entity = new PhysicalBatchQueryEntity();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日hh:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Object[] objects = (Object[]) list.get(i);
             entity.setProjectrawdataId(i+1L);
             entity.setRawprojectBatchcode((String) objects[0]);
