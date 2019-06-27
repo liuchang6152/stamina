@@ -56,16 +56,29 @@ public class ScoreConfigureServiceImpl implements ScoreConfigureService {
         List<Map> list = new ArrayList<>();
         List<ScoreConfigurePojo> scoreConfigureList = scoreConfigureRepository.findByprojectFormId(projectformId);
         ProjectFormPojo projectFormPojo = projectFormRepository.findOne(projectformId);
-        for (ScoreConfigurePojo pojo : scoreConfigureList) {
+
+        if (scoreConfigureList.size() != 0) {
+            for (ScoreConfigurePojo pojo : scoreConfigureList) {
+                Map map = new HashMap();
+                map.put("scoreconfigureLow", pojo.getScoreconfigureLow());
+                map.put("scoreconfigureHigh", pojo.getScoreconfigureHigh());
+                map.put("scoreconfigureFraction", pojo.getScoreconfigureFraction());
+                if (projectFormPojo.getProjectCompany() != null) {
+                    map.put("projectCompany", CommonEnum.Unit.getName(projectFormPojo.getProjectCompany()));
+                }
+                list.add(map);
+            }
+        } else {
             Map map = new HashMap();
-            map.put("scoreconfigureLow", pojo.getScoreconfigureLow());
-            map.put("scoreconfigureHigh", pojo.getScoreconfigureHigh());
-            map.put("scoreconfigureFraction", pojo.getScoreconfigureFraction());
+            map.put("scoreconfigureLow", null);
+            map.put("scoreconfigureHigh", null);
+            map.put("scoreconfigureFraction", null);
             if (projectFormPojo.getProjectCompany() != null) {
                 map.put("projectCompany", CommonEnum.Unit.getName(projectFormPojo.getProjectCompany()));
             }
             list.add(map);
         }
+
         return list;
     }
 }
