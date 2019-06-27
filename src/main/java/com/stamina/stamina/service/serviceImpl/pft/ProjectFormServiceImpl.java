@@ -3,10 +3,10 @@ package com.stamina.stamina.service.serviceImpl.pft;
 import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.common.util.Pagination;
+import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.dao.pft.ProjectFormRepository;
 import com.stamina.stamina.dao.pft.ScoreConfigureRepository;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
-import com.stamina.stamina.entity.pft.ProjectFormEntityPage;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import com.stamina.stamina.pojo.pft.ScoreConfigurePojo;
@@ -37,9 +37,9 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     private ScoreConfigureRepository scoreConfigureRepository;
 
     @Override
-    public ProjectFormEntityPage getProjectFormList(Pagination page) {
+    public PaginationBean getProjectFormList(Pagination page) {
 
-        ProjectFormEntityPage projectFormEntityPage = new ProjectFormEntityPage();
+        PaginationBean paginationBean = new PaginationBean();
         // 分页且降序
         PageRequest pageRequest = new PageRequest(page.getPageIndex() - 1, page.getPageSize(), Sort.Direction.DESC, "projectformId");
         Page<ProjectFormPojo> all = projectFormRepository.findAll(pageRequest);
@@ -58,11 +58,13 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
             projectFormEntityList.add(projectFormEntity);
         }
-        projectFormEntityPage.setProjectFormPojoList(projectFormEntityList);
-        projectFormEntityPage.setTotalElements(totalElements);
-        projectFormEntityPage.setTotalPages(totalPages);
 
-        return projectFormEntityPage;
+        paginationBean.setPageList(projectFormEntityList);
+        paginationBean.setData(projectFormEntityList);
+        paginationBean.setTotalPage(totalPages);
+        paginationBean.setTotal(totalElements);
+
+        return paginationBean;
     }
 
     @Override

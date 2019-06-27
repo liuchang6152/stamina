@@ -2,10 +2,9 @@ package com.stamina.stamina.controller.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.common.util.Pagination;
+import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
-import com.stamina.stamina.entity.pft.ProjectFormEntityPage;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
-import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import com.stamina.stamina.service.pft.ProjectFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,7 +33,7 @@ public class ProjectFormController {
      * 获取项目清单
      */
     @GetMapping()
-    public ProjectFormEntityPage getProjectFormList( Pagination page) {
+    public PaginationBean getProjectFormList(Pagination page) {
         if (page.getPageIndex() < 1) {
             page.setPageIndex(1);
         }

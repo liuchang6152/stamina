@@ -2,10 +2,9 @@ package com.stamina.stamina.service.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.common.util.Pagination;
+import com.stamina.stamina.common.util.PaginationBean;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
-import com.stamina.stamina.entity.pft.ProjectFormEntityPage;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
-import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,7 @@ public interface ProjectFormService {
     /**
      * 获取项目清单
      */
-    ProjectFormEntityPage getProjectFormList(Pagination page);
+    PaginationBean getProjectFormList(Pagination page);
     /**
      * 新增项目清单信息
      * @param entity
