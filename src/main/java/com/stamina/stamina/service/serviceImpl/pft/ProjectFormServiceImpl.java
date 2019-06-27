@@ -2,9 +2,11 @@ package com.stamina.stamina.service.serviceImpl.pft;
 
 import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.dao.pft.ProjectFormRepository;
 import com.stamina.stamina.dao.pft.ScoreConfigureRepository;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
+import com.stamina.stamina.entity.pft.ProjectFormEntityPage;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import com.stamina.stamina.pojo.pft.ScoreConfigurePojo;
@@ -14,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -36,26 +37,30 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     private ScoreConfigureRepository scoreConfigureRepository;
 
     @Override
-    public List<ProjectFormEntity> getProjectFormList(Pagination page) {
+    public ProjectFormEntityPage getProjectFormList(Pagination page) {
 
-        //设置分页  和降序
-       // PageRequest pageRequest = new PageRequest(page.getPageIndex(), page.getPageSize(),new Sort(Sort.Direction.DESC, "projectformId"));
-        PageRequest pageRequest = new PageRequest(page.getPageIndex(), page.getPageSize());
-
-
-        List<ProjectFormEntity> entities = new ArrayList<>();
+        ProjectFormEntityPage projectFormEntityPage = new ProjectFormEntityPage();
+        // 分页且降序
+        PageRequest pageRequest = new PageRequest(page.getPageIndex() - 1, page.getPageSize(), Sort.Direction.DESC, "projectformId");
         Page<ProjectFormPojo> all = projectFormRepository.findAll(pageRequest);
-        //List<ProjectFormPojo> all = projectFormRepository.findAll();
-        for (ProjectFormPojo formPojo : all) {
+        //取出查询出来的值
+        List<ProjectFormPojo> content = all.getContent();
+        //总的条数
+        long totalElements = all.getTotalElements();
+        List<ProjectFormEntity> projectFormEntityList = new ArrayList<>();
+        for (ProjectFormPojo formPojo : content) {
             ProjectFormEntity projectFormEntity = new ProjectFormEntity();
             projectFormEntity.setAbroadNameCode(formPojo.getAbroadNameCode());
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
             projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
-            entities.add(projectFormEntity);
+            projectFormEntityList.add(projectFormEntity);
         }
-        return entities;
+        projectFormEntityPage.setProjectFormPojoList(projectFormEntityList);
+        projectFormEntityPage.setTotalElements(totalElements);
+
+        return projectFormEntityPage;
     }
 
     @Override
@@ -108,7 +113,6 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         return commonResult;
     }
 
-
     @Override
     @Transactional
     public CommonResult delProjectInfo(Long[] projectFormIds) {
@@ -142,7 +146,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
             commonResult.setResult(projectFormEntity);
             commonResult.setIsSuccess(true);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             commonResult.setMessage("获取失败！");
             commonResult.setIsSuccess(false);
         }
@@ -153,13 +157,13 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     public List<Map> getUnit() {
         List<Map> list = new ArrayList<>();
         Map map = new HashMap();
-        map.put("key","");
-        map.put("value","请选择");
+        map.put("key", "");
+        map.put("value", "请选择");
         list.add(map);
         for (int i = 0; i < 5; i++) {
             Map map1 = new HashMap();
-            map1.put("key",i);
-            map1.put("value",CommonEnum.Unit.getName(i));
+            map1.put("key", i);
+            map1.put("value", CommonEnum.Unit.getName(i));
             list.add(map1);
         }
         return list;
@@ -197,13 +201,12 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             }
             commonResult.setMessage("修改成功");
             commonResult.setIsSuccess(true);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             commonResult.setMessage("修改失败！");
             commonResult.setIsSuccess(false);
         }
         return commonResult;
     }
-
 
     /**
      * 校验项目名
@@ -213,14 +216,10 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         List<ProjectFormPojo> byprojectName = projectFormRepository.findByprojectName(entity.getProjectName());
         if (byprojectName.size() > 0) {
             for (ProjectFormPojo projectFormPojo : byprojectName) {
-                //当项目名相同的时候
-                if (projectFormPojo.getProjectName().equals(entity.getProjectName())) {
-                    //判断 主键id是否 一致    项目名 相同但是主键不同则报错
-                    if (projectFormPojo.getProjectformId().longValue() != entity.getProjectformId().longValue()) {
-                        commonResult.setMessage("项目名称重复！");
-                        commonResult.setIsSuccess(false);
-                        return commonResult;
-                    }
+                if (projectFormPojo.getProjectformId().longValue() != entity.getProjectformId().longValue()) {
+                    commonResult.setMessage("项目名称重复！");
+                    commonResult.setIsSuccess(false);
+                    return commonResult;
                 }
             }
         }

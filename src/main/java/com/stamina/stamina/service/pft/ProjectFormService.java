@@ -3,6 +3,7 @@ package com.stamina.stamina.service.pft;
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
+import com.stamina.stamina.entity.pft.ProjectFormEntityPage;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 
@@ -21,7 +22,7 @@ public interface ProjectFormService {
     /**
      * 获取项目清单
      */
-    List<ProjectFormEntity> getProjectFormList(Pagination page);
+    ProjectFormEntityPage getProjectFormList(Pagination page);
     /**
      * 新增项目清单信息
      * @param entity

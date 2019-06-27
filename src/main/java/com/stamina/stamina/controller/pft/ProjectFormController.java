@@ -3,12 +3,14 @@ package com.stamina.stamina.controller.pft;
 import com.stamina.stamina.common.util.CommonResult;
 import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
+import com.stamina.stamina.entity.pft.ProjectFormEntityPage;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import com.stamina.stamina.service.pft.ProjectFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 /*
@@ -32,47 +34,54 @@ public class ProjectFormController {
      * 获取项目清单
      */
     @GetMapping()
-    public List<ProjectFormEntity> getProjectFormList(Pagination page){
+    public ProjectFormEntityPage getProjectFormList( Pagination page) {
+        if (page.getPageIndex() < 1) {
+            page.setPageIndex(1);
+        }
         return projectFormService.getProjectFormList(page);
     }
 
     /**
      * 新增项目清单信息
+     *
      * @param entity
      * @return
      */
     @PostMapping()
-    public CommonResult addProjectInfo(@RequestBody ProjectFormEntity entity){
+    public CommonResult addProjectInfo(@RequestBody ProjectFormEntity entity) {
         return projectFormService.addProjectInfo(entity);
     }
 
     /**
      * 修改项目清单信息
+     *
      * @param entity
      * @return
      */
     @PutMapping()
-    public CommonResult updateProjectInfo(@RequestBody ProjectFormEntity entity){
+    public CommonResult updateProjectInfo(@RequestBody ProjectFormEntity entity) {
         return projectFormService.updateProjectInfo(entity);
     }
 
     /**
      * 删除项目清单信息
+     *
      * @param projectFormIds
      * @return
      */
     @DeleteMapping()
-    public CommonResult delProjectInfo(Long [] projectFormIds){
+    public CommonResult delProjectInfo(Long[] projectFormIds) {
         return projectFormService.delProjectInfo(projectFormIds);
     }
 
     /**
      * 根据项目ID获取项目信息
+     *
      * @param projectFormId
      * @return
      */
     @GetMapping("getProjectById")
-    public CommonResult getProjectById(Long projectFormId){
+    public CommonResult getProjectById(Long projectFormId) {
         return projectFormService.getProjectById(projectFormId);
     }
 
@@ -80,7 +89,7 @@ public class ProjectFormController {
      * 获取单位下拉框
      */
     @GetMapping("getUnit")
-    public List<Map> getUnit(){
+    public List<Map> getUnit() {
         return projectFormService.getUnit();
     }
 
@@ -88,7 +97,7 @@ public class ProjectFormController {
      * 获取项目清单配置信息
      */
     @GetMapping("getProjectSetting")
-    public List<ProjectSettingEntity> getProjectSetting(){
+    public List<ProjectSettingEntity> getProjectSetting() {
         return projectFormService.getProjectSetting();
     }
 
@@ -96,7 +105,7 @@ public class ProjectFormController {
      * 修改项目清单配置信息
      */
     @PutMapping("updProjectSetting")
-    public CommonResult updProjectSetting(@RequestBody ProjectSettingEntity entity){
+    public CommonResult updProjectSetting(@RequestBody ProjectSettingEntity entity) {
         return projectFormService.updProjectSetting(entity);
     }
 
