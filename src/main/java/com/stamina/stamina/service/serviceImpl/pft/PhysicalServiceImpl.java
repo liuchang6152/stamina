@@ -48,7 +48,6 @@ public class PhysicalServiceImpl implements PhysicalService {
     @Transactional
     public CommonResult physicalServiceinfo(String json) throws Exception {
         CommonResult commonResult = new CommonResult();
-
         try {
             JSONObject jsonObject = JSONObject.parseObject(json);
             JSONObject jsonObject1 = (JSONObject) jsonObject.get("params");
@@ -61,6 +60,7 @@ public class PhysicalServiceImpl implements PhysicalService {
             String code = dateStr+fatch;
             //code = new StringBuffer("2019061220190612001");
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date1 = new Date();
             for (Object o : jsonArray) {
                 List<String> str = (List) o;
                 //项目原始清单
@@ -73,6 +73,7 @@ public class PhysicalServiceImpl implements PhysicalService {
                 projectRawDataPojo.setRawprojectValue(Long.valueOf(projectValue.toString()));
                 projectRawDataPojo.setRawprojectTime(format.parse(str.get(4)));
                 projectRawDataPojo.setRawprojectRepeatdata(str.get(5));
+                projectRawDataPojo.setRawprojectBatchTime(date1);
                 projectRawDataRepository.save(projectRawDataPojo);
             }
             commonResult = recalculateService(code);
@@ -188,10 +189,7 @@ public class PhysicalServiceImpl implements PhysicalService {
             projectRawDataPojo.setRawprojectBatchcode(batch);
             Example<ProjectRawDataPojo> example = Example.of(projectRawDataPojo);
             List<ProjectRawDataPojo> all1 = projectRawDataRepository.findAll(example);
-
-
             for (ProjectRawDataPojo projectRawDataPojo1 : all1) {
-                //人员
                 TestersAttributePojo testersAttributePojo = new TestersAttributePojo();
                 testersAttributePojo.setRawprojectBatchcode(batch);
                 testersAttributePojo.setRawprojectPeoplecode(projectRawDataPojo1.getRawprojectProplecode());
@@ -207,7 +205,7 @@ public class PhysicalServiceImpl implements PhysicalService {
 
                 }
             }
-
+            
             //计算总分
             TestersAttributePojo testersAttributePojo1 = new TestersAttributePojo();
             testersAttributePojo1.setRawprojectBatchcode(batch);
@@ -226,6 +224,25 @@ public class PhysicalServiceImpl implements PhysicalService {
                 testersAttributePojo.setTestersTotalscore(score);
                 testersAttributeRepository.save(testersAttributePojo);
                 score=0l;
+            }
+            //身高体重
+            for (TestersAttributePojo testersAttributePojo : all2) {
+                ProjectRawDataPojo projectRawDataPojo1 = new ProjectRawDataPojo();
+                projectRawDataPojo1.setRawprojectBatchcode(batch);
+                projectRawDataPojo1.setRawprojectName("身高体重");
+                projectRawDataPojo1.setRawprojectProplecode(testersAttributePojo.getRawprojectPeoplecode());
+                Example<ProjectRawDataPojo> example1 = Example.of(projectRawDataPojo1);
+                List<ProjectRawDataPojo> all3 = projectRawDataRepository.findAll(example1);
+                for (ProjectRawDataPojo rawDataPojo : all3) {
+                    testersAttributePojo.setTestersHeight(rawDataPojo.getRawprojectValue()+"");
+                }
+                projectRawDataPojo1.setRawprojectName("体重");
+                Example<ProjectRawDataPojo> example2 = Example.of(projectRawDataPojo1);
+                List<ProjectRawDataPojo> all4 = projectRawDataRepository.findAll(example2);
+                for (ProjectRawDataPojo rawDataPojo : all4) {
+                    testersAttributePojo.setTestersWeight(rawDataPojo.getRawprojectValue()+"");
+                }
+                testersAttributeRepository.save(testersAttributePojo);
             }
             commonResult.setIsSuccess(true);
             commonResult.setMessage("成功！");

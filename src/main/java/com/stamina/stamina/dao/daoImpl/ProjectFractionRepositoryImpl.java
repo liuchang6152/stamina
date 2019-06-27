@@ -16,8 +16,8 @@ public class ProjectFractionRepositoryImpl extends BaseRepository<ProjectFractio
         String count = 1+"";
         String sql="  \n" +
                 "select count(*) as count from t_pft_projectrawdata as p\n" +
-                "where p.RAWPROJECT_TIME >= date(now())\n" +
-                "and  p.RAWPROJECT_TIME < DATE_ADD(date(now()),INTERVAL 1 DAY) group by p.RAWPROJECT_BATCHCODE ";
+                "where p.RAWPROJECT_BATCHTIME >= date(now())\n" +
+                "and  p.RAWPROJECT_BATCHTIME < DATE_ADD(date(now()),INTERVAL 1 DAY) group by p.RAWPROJECT_BATCHCODE ";
         Query query1 = getEntityManager().createNativeQuery(sql.toString());
         query1.unwrap(org.hibernate.SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<Map> resultList = query1.getResultList();

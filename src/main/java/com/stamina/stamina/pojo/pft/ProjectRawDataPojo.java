@@ -60,6 +60,13 @@ public class ProjectRawDataPojo {
     @Column(name = "RAWPROJECT_REPEATDATA")
     private String rawprojectRepeatdata;
 
+    /**
+     * 批次时间
+     * @return
+     */
+    @Column(name = "RAWPROJECT_BATCHTIME")
+    private Date rawprojectBatchTime;
+
     public Long getProjectrawdataId() {
         return projectrawdataId;
     }
@@ -122,5 +129,13 @@ public class ProjectRawDataPojo {
 
     public void setRawprojectRepeatdata(String rawprojectRepeatdata) {
         this.rawprojectRepeatdata = rawprojectRepeatdata == null ? null : rawprojectRepeatdata.trim();
+    }
+
+    public Date getRawprojectBatchTime() {
+        return rawprojectBatchTime;
+    }
+
+    public void setRawprojectBatchTime(Date rawprojectBatchTime) {
+        this.rawprojectBatchTime = rawprojectBatchTime;
     }
 }

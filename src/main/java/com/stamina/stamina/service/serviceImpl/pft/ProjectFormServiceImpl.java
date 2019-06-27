@@ -70,6 +70,11 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         return paginationBean;
     }
 
+    /***
+     * 添加项目
+     * @param entity
+     * @return
+     */
     @Override
     public CommonResult addProjectInfo(ProjectFormEntity entity) {
         CommonResult commonResult = new CommonResult();
@@ -80,9 +85,10 @@ public class ProjectFormServiceImpl implements ProjectFormService {
                 return check;
             }
             ProjectFormPojo formPojo = new ProjectFormPojo();
+            formPojo.setProjectName(entity.getProjectName());
             formPojo.setAbroadNameCode(entity.getAbroadNameCode());
             formPojo.setProjectCompany(entity.getProjectCompany());
-            formPojo.setProjectName(entity.getProjectName());
+            formPojo.setScoreconfigureMany(entity.getScoreconfigureMany());
             projectFormRepository.save(formPojo);
             commonResult.setIsSuccess(true);
             commonResult.setMessage("添加成功！");
@@ -105,10 +111,11 @@ public class ProjectFormServiceImpl implements ProjectFormService {
                 return check;
             }
             ProjectFormPojo formPojo = new ProjectFormPojo();
-            formPojo.setAbroadNameCode(entity.getAbroadNameCode());
-            formPojo.setProjectCompany(entity.getProjectCompany());
             formPojo.setProjectformId(entity.getProjectformId());
             formPojo.setProjectName(entity.getProjectName());
+            formPojo.setAbroadNameCode(entity.getAbroadNameCode());
+            formPojo.setProjectCompany(entity.getProjectCompany());
+            formPojo.setScoreconfigureMany(entity.getScoreconfigureMany());
             projectFormRepository.save(formPojo);
             commonResult.setIsSuccess(true);
             commonResult.setMessage("修改成功！");
