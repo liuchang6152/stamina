@@ -47,6 +47,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         List<ProjectFormPojo> content = all.getContent();
         //总的条数
         long totalElements = all.getTotalElements();
+        int totalPages = all.getTotalPages();
         List<ProjectFormEntity> projectFormEntityList = new ArrayList<>();
         for (ProjectFormPojo formPojo : content) {
             ProjectFormEntity projectFormEntity = new ProjectFormEntity();
@@ -59,6 +60,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         }
         projectFormEntityPage.setProjectFormPojoList(projectFormEntityList);
         projectFormEntityPage.setTotalElements(totalElements);
+        projectFormEntityPage.setTotalPages(totalPages);
 
         return projectFormEntityPage;
     }

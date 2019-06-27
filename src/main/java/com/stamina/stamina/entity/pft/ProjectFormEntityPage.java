@@ -15,6 +15,9 @@ public class ProjectFormEntityPage {
      */
     private long totalElements;
 
+    //总页数
+    private int totalPages;
+
     public List<ProjectFormEntity> getProjectFormPojoList() {
         return projectFormPojoList;
     }
@@ -29,5 +32,13 @@ public class ProjectFormEntityPage {
 
     public void setTotalElements(long totalElements) {
         this.totalElements = totalElements;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 }
