@@ -1,5 +1,6 @@
 package com.stamina.stamina.service.serviceImpl.pft;
 
+import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.dao.pft.ProjectFormRepository;
 import com.stamina.stamina.dao.pft.ScoreConfigureRepository;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
@@ -54,11 +55,15 @@ public class ScoreConfigureServiceImpl implements ScoreConfigureService {
 
         List<Map> list = new ArrayList<>();
         List<ScoreConfigurePojo> scoreConfigureList = scoreConfigureRepository.findByprojectFormId(projectformId);
+        ProjectFormPojo projectFormPojo = projectFormRepository.findOne(projectformId);
         for (ScoreConfigurePojo pojo : scoreConfigureList) {
             Map map = new HashMap();
             map.put("scoreconfigureLow", pojo.getScoreconfigureLow());
             map.put("scoreconfigureHigh", pojo.getScoreconfigureHigh());
             map.put("scoreconfigureFraction", pojo.getScoreconfigureFraction());
+            if (projectFormPojo.getProjectCompany() != null) {
+                map.put("projectCompany", CommonEnum.Unit.getName(projectFormPojo.getProjectCompany()));
+            }
             list.add(map);
         }
         return list;

@@ -2,7 +2,6 @@ package com.stamina.stamina.service.serviceImpl.pft;
 
 import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.common.util.CommonResult;
-import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.dao.pft.ProjectFormRepository;
 import com.stamina.stamina.dao.pft.ScoreConfigureRepository;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
@@ -109,6 +108,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
         return commonResult;
     }
 
+
     @Override
     @Transactional
     public CommonResult delProjectInfo(Long[] projectFormIds) {
@@ -142,7 +142,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
             commonResult.setResult(projectFormEntity);
             commonResult.setIsSuccess(true);
-        } catch (Exception ex) {
+        }catch (Exception ex){
             commonResult.setMessage("获取失败！");
             commonResult.setIsSuccess(false);
         }
@@ -153,13 +153,13 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     public List<Map> getUnit() {
         List<Map> list = new ArrayList<>();
         Map map = new HashMap();
-        map.put("key", "");
-        map.put("value", "请选择");
+        map.put("key","");
+        map.put("value","请选择");
         list.add(map);
         for (int i = 0; i < 5; i++) {
             Map map1 = new HashMap();
-            map1.put("key", i);
-            map1.put("value", CommonEnum.Unit.getName(i));
+            map1.put("key",i);
+            map1.put("value",CommonEnum.Unit.getName(i));
             list.add(map1);
         }
         return list;
@@ -197,12 +197,13 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             }
             commonResult.setMessage("修改成功");
             commonResult.setIsSuccess(true);
-        } catch (Exception ex) {
+        } catch (Exception ex){
             commonResult.setMessage("修改失败！");
             commonResult.setIsSuccess(false);
         }
         return commonResult;
     }
+
 
     /**
      * 校验项目名

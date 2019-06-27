@@ -1,6 +1,7 @@
 package com.stamina.stamina.controller.pft;
 
 import com.stamina.stamina.common.util.CommonResult;
+import com.stamina.stamina.common.util.Pagination;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
@@ -31,8 +32,8 @@ public class ProjectFormController {
      * 获取项目清单
      */
     @GetMapping()
-    public List<ProjectFormEntity> getProjectFormList(){
-        return projectFormService.getProjectFormList();
+    public List<ProjectFormEntity> getProjectFormList(Pagination page){
+        return projectFormService.getProjectFormList(page);
     }
 
     /**

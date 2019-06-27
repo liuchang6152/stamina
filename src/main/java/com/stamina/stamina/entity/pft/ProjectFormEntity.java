@@ -41,6 +41,8 @@ public class ProjectFormEntity {
      */
     private Integer scoreconfigureMany;
 
+    private String scoreconfigureManyName;
+
     public Long getProjectformId() {
         return projectformId;
     }
@@ -79,6 +81,14 @@ public class ProjectFormEntity {
 
     public void setScoreconfigureMany(Integer scoreconfigureMany) {
         this.scoreconfigureMany = scoreconfigureMany;
+    }
+
+    public String getScoreconfigureManyName() {
+        return scoreconfigureManyName;
+    }
+
+    public void setScoreconfigureManyName(String scoreconfigureManyName) {
+        this.scoreconfigureManyName = scoreconfigureManyName;
     }
 
     public String getProjectCompanyName() {
