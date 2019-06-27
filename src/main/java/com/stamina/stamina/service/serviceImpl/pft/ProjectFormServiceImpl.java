@@ -140,7 +140,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setProjectCompanyName(CommonEnum.Unit.getName(formPojo.getProjectCompany()));
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
-            projectFormEntity.setScoreconfigureMany(formPojo.getProjectCompany());
+            projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
             if (formPojo.getScoreconfigureMany() != null) {
                 projectFormEntity.setScoreconfigureManyName(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
             }
