@@ -27,7 +27,6 @@ public class PhysicalServiceController {
 
     @PostMapping()
     public CommonResult physicalServiceinfo(@RequestBody String json) throws Exception {
-
         return physicalService.physicalServiceinfo(json);
     }
 
