@@ -110,8 +110,13 @@ public class TestersAttributeServiceImpl implements TestersAttributeService {
             if (!StringUtils.isEmpty(pojo.getTestersGender())) {
                 entity.setTestersGender(CommonEnum.TestersSexEnum.getName(Integer.parseInt(pojo.getTestersGender())));
             }
-            entity.setTestersHeight(pojo.getTestersHeight());
-            entity.setTestersWeight(pojo.getTestersWeight());
+
+            if (!StringUtils.isEmpty(pojo.getTestersHeight())) {
+                entity.setTestersHeight(String.valueOf(Integer.valueOf(pojo.getTestersHeight())/100));
+            }
+            if (!StringUtils.isEmpty(pojo.getTestersWeight())) {
+                entity.setTestersWeight(String.valueOf(Integer.valueOf(pojo.getTestersWeight())/100));
+            }
             entity.setUserIdCard(pojo.getUserIdcard());
             entity.setTestersTotalScore(pojo.getTestersTotalscore());
             entity.setRawprojectPeoplecode(pojo.getRawprojectPeoplecode());
