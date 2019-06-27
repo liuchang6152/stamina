@@ -34,9 +34,7 @@ public class ProjectFormController {
      */
     @GetMapping()
     public PaginationBean getProjectFormList(Pagination page) {
-        if (page.getPageIndex() < 1) {
-            page.setPageIndex(1);
-        }
+
         return projectFormService.getProjectFormList(page);
     }
 

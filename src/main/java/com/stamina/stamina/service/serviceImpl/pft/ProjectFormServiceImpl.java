@@ -38,10 +38,13 @@ public class ProjectFormServiceImpl implements ProjectFormService {
 
     @Override
     public PaginationBean getProjectFormList(Pagination page) {
-
+        //默认第一页  PageIndex = 0
+        if (page.getPageIndex() < 1) {
+            page.setPageIndex(0);
+        }
         PaginationBean paginationBean = new PaginationBean();
         // 分页且降序
-        PageRequest pageRequest = new PageRequest(page.getPageIndex() - 1, page.getPageSize(), Sort.Direction.DESC, "projectformId");
+        PageRequest pageRequest = new PageRequest(page.getPageIndex() , page.getPageSize(), Sort.Direction.DESC, "projectformId");
         Page<ProjectFormPojo> all = projectFormRepository.findAll(pageRequest);
         //取出查询出来的值
         List<ProjectFormPojo> content = all.getContent();
