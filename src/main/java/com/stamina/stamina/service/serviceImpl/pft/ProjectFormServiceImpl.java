@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -59,6 +60,9 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectFormEntity.setProjectformId(formPojo.getProjectformId());
             projectFormEntity.setProjectName(formPojo.getProjectName());
             projectFormEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
+            if (!StringUtils.isEmpty(formPojo.getScoreconfigureMany())) {
+                projectFormEntity.setScoreconfigureManyName(CommonEnum.ScoreTypeEnum.getName(formPojo.getScoreconfigureMany()));
+            }
             projectFormEntityList.add(projectFormEntity);
         }
 

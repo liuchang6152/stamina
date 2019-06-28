@@ -38,7 +38,7 @@ public class TestersAttributeRepositoryImpl extends BaseRepository<TestersAttrib
                 paramlist.put("testersGender", testersGender);
             }
             if (!StringUtils.isEmpty(beginScore)) {
-                hql.append(" and t.testersTotalscore > :beginScore");
+                hql.append(" and t.testersTotalscore >= :beginScore");
                 paramlist.put("beginScore", beginScore);
             }
             if (!StringUtils.isEmpty(endScore)) {
