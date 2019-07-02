@@ -8,6 +8,7 @@ import com.stamina.stamina.dao.pft.ProjectFormRepository;
 import com.stamina.stamina.dao.pft.ScoreConfigureRepository;
 import com.stamina.stamina.entity.pft.ProjectFormEntity;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
+import com.stamina.stamina.entity.pft.ScoreConfigureEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import com.stamina.stamina.pojo.pft.ScoreConfigurePojo;
 import com.stamina.stamina.service.pft.ProjectFormService;
@@ -197,13 +198,24 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             projectSettingEntity.setProjectName(formPojo.getProjectName());
             projectSettingEntity.setScoreconfigureMany(formPojo.getScoreconfigureMany());
             List<ScoreConfigurePojo> scoreConfigurePojos = scoreConfigureRepository.findByprojectFormId(formPojo.getProjectformId());
-            projectSettingEntity.setScoreConfigurePojos(scoreConfigurePojos);
+            List<ScoreConfigureEntity> list1 = new ArrayList<>();
+            for (ScoreConfigurePojo scoreConfigurePojo : scoreConfigurePojos) {
+                ScoreConfigureEntity scoreConfigureEntity = new ScoreConfigureEntity();
+                scoreConfigureEntity.setProjectFormId(scoreConfigurePojo.getProjectFormId());
+                scoreConfigureEntity.setScoreconfigureFraction((scoreConfigurePojo.getScoreconfigureFraction()/100)+"");
+                scoreConfigureEntity.setScoreconfigureHigh((scoreConfigurePojo.getScoreconfigureHigh()/100)+"");
+                scoreConfigureEntity.setScoreconfigureLow((scoreConfigurePojo.getScoreconfigureLow()/100)+"");
+                scoreConfigureEntity.setScoreconfigureId(scoreConfigurePojo.getScoreconfigureId());
+                list1.add(scoreConfigureEntity);
+            }
+            projectSettingEntity.setScoreConfigurePojos(list1);
             list.add(projectSettingEntity);
         }
         return list;
     }
 
     @Override
+    @Transactional
     public CommonResult updProjectSetting(ProjectSettingEntity entity) {
         CommonResult commonResult = new CommonResult();
         try {
@@ -214,13 +226,18 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             for (ScoreConfigurePojo scoreConfigurePojo : byprojectFormId) {
                 scoreConfigureRepository.delete(scoreConfigurePojo);
             }
-            for (ScoreConfigurePojo scoreConfigurePojo : entity.getScoreConfigurePojos()) {
+            for (ScoreConfigureEntity scoreConfigureEntity : entity.getScoreConfigurePojos()) {
+                ScoreConfigurePojo scoreConfigurePojo = new ScoreConfigurePojo();
+                scoreConfigurePojo.setScoreconfigureFraction(scoreConfigureEntity.getScoreconfigureId());
+                scoreConfigurePojo.setScoreconfigureHigh(Long.valueOf(scoreConfigureEntity.getScoreconfigureHigh()));
+                scoreConfigurePojo.setScoreconfigureLow(Long.valueOf(scoreConfigureEntity.getScoreconfigureLow()));
+                scoreConfigurePojo.setProjectFormId(scoreConfigureEntity.getProjectFormId());
                 scoreConfigureRepository.save(scoreConfigurePojo);
             }
-            commonResult.setMessage("修改成功");
+            commonResult.setMessage("保存成功");
             commonResult.setIsSuccess(true);
         } catch (Exception ex) {
-            commonResult.setMessage("修改失败！");
+            commonResult.setMessage("保存失败！");
             commonResult.setIsSuccess(false);
         }
         return commonResult;

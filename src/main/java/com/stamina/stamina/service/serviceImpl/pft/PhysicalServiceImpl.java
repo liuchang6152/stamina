@@ -158,8 +158,8 @@ public class PhysicalServiceImpl implements PhysicalService {
                     Long score = 0l;
                     List<ScoreConfigurePojo> byprojectFormId = scoreConfigureRepository.findByprojectFormId(projectFormPojo.getProjectformId());
                     for (ScoreConfigurePojo scoreConfigurePojo : byprojectFormId) {
-                        if (scoreConfigurePojo.getScoreconfigureLow() <= value && value < scoreConfigurePojo.getScoreconfigureHigh()) {
-                            score = scoreConfigurePojo.getScoreconfigureFraction();
+                        if (scoreConfigurePojo.getScoreconfigureLow() / 100 <= value && value < scoreConfigurePojo.getScoreconfigureHigh() / 100) {
+                            score = scoreConfigurePojo.getScoreconfigureFraction()/100;
                         }
                     }
                     ProjectFractionPojo projectFractionPojo1 = new ProjectFractionPojo();

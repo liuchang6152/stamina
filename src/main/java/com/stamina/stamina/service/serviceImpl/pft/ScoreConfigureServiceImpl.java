@@ -4,6 +4,7 @@ import com.stamina.stamina.common.util.CommonEnum;
 import com.stamina.stamina.dao.pft.ProjectFormRepository;
 import com.stamina.stamina.dao.pft.ScoreConfigureRepository;
 import com.stamina.stamina.entity.pft.ProjectSettingEntity;
+import com.stamina.stamina.entity.pft.ScoreConfigureEntity;
 import com.stamina.stamina.pojo.pft.ProjectFormPojo;
 import com.stamina.stamina.pojo.pft.ScoreConfigurePojo;
 import com.stamina.stamina.service.pft.ScoreConfigureService;
@@ -37,13 +38,22 @@ public class ScoreConfigureServiceImpl implements ScoreConfigureService {
         List<ProjectSettingEntity> projectSettingEntityList = new ArrayList<>();
 
         List<ScoreConfigurePojo> scoreConfigureList = scoreConfigureRepository.findByprojectFormId(projectformId);
-
+        List<ScoreConfigureEntity> list1 = new ArrayList<>();
+        for (ScoreConfigurePojo scoreConfigurePojo : scoreConfigureList) {
+            ScoreConfigureEntity scoreConfigureEntity = new ScoreConfigureEntity();
+            scoreConfigureEntity.setProjectFormId(scoreConfigurePojo.getProjectFormId());
+            scoreConfigureEntity.setScoreconfigureFraction((scoreConfigurePojo.getScoreconfigureFraction()/100)+"");
+            scoreConfigureEntity.setScoreconfigureHigh((scoreConfigurePojo.getScoreconfigureHigh()/100)+"");
+            scoreConfigureEntity.setScoreconfigureLow((scoreConfigurePojo.getScoreconfigureLow()/100)+"");
+            scoreConfigureEntity.setScoreconfigureId(scoreConfigurePojo.getScoreconfigureId());
+            list1.add(scoreConfigureEntity);
+        }
         ProjectFormPojo projectFormPojo = projectFormRepository.findProjectFormPojoByProjectformId(projectformId);
 
         ProjectSettingEntity entity = new ProjectSettingEntity();
         entity.setProjectformId(projectformId);
         entity.setProjectName(projectFormPojo.getProjectName());
-        entity.setScoreConfigurePojos(scoreConfigureList);
+        entity.setScoreConfigurePojos(list1);
 
         projectSettingEntityList.add(entity);
 

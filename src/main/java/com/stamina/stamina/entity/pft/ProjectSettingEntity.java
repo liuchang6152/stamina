@@ -25,7 +25,7 @@ public class ProjectSettingEntity {
     /**
      * 项目清单配置信息
      */
-    private List<ScoreConfigurePojo> scoreConfigurePojos;
+    private List<ScoreConfigureEntity> scoreConfigurePojos;
 
     public Long getProjectformId() {
         return projectformId;
@@ -43,11 +43,11 @@ public class ProjectSettingEntity {
         this.projectName = projectName;
     }
 
-    public List<ScoreConfigurePojo> getScoreConfigurePojos() {
+    public List<ScoreConfigureEntity> getScoreConfigurePojos() {
         return scoreConfigurePojos;
     }
 
-    public void setScoreConfigurePojos(List<ScoreConfigurePojo> scoreConfigurePojos) {
+    public void setScoreConfigurePojos(List<ScoreConfigureEntity> scoreConfigurePojos) {
         this.scoreConfigurePojos = scoreConfigurePojos;
     }
 
