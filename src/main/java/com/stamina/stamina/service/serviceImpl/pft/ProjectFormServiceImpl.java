@@ -215,7 +215,6 @@ public class ProjectFormServiceImpl implements ProjectFormService {
     }
 
     @Override
-    @Transactional
     public CommonResult updProjectSetting(ProjectSettingEntity entity) {
         CommonResult commonResult = new CommonResult();
         try {
@@ -228,7 +227,7 @@ public class ProjectFormServiceImpl implements ProjectFormService {
             }
             for (ScoreConfigureEntity scoreConfigureEntity : entity.getScoreConfigurePojos()) {
                 ScoreConfigurePojo scoreConfigurePojo = new ScoreConfigurePojo();
-                scoreConfigurePojo.setScoreconfigureFraction(scoreConfigureEntity.getScoreconfigureId());
+                scoreConfigurePojo.setScoreconfigureFraction(Long.valueOf(scoreConfigureEntity.getScoreconfigureFraction()));
                 scoreConfigurePojo.setScoreconfigureHigh(Long.valueOf(scoreConfigureEntity.getScoreconfigureHigh()));
                 scoreConfigurePojo.setScoreconfigureLow(Long.valueOf(scoreConfigureEntity.getScoreconfigureLow()));
                 scoreConfigurePojo.setProjectFormId(scoreConfigureEntity.getProjectFormId());

@@ -105,8 +105,8 @@ public class PhysicalServiceImpl implements PhysicalService {
                 //给原始数据分组
                 ProjectFractionPojo projectFractionPojo = new ProjectFractionPojo();
                 List<ProjectRawDataPojo> all1 = projectRawDataRepository.findAll(example);
-                if(all1.size()>0){
-                    ProjectRawDataPojo rawDataPojo = all1.get(0);
+                for(int i  = 0 ;i< all1.size();i++){
+                    ProjectRawDataPojo rawDataPojo = all1.get(i);
                     projectFractionPojo.setProjectCompany(rawDataPojo.getRawprojectCompany());
                     projectFractionPojo.setProjectBatchcode(batch);
                     projectFractionPojo.setProjectName(rawDataPojo.getRawprojectName());
